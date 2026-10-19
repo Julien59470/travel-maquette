@@ -44,7 +44,7 @@
     .nav{height:46px;display:flex;align-items:center;gap:3px;padding:5px;border:1px solid rgba(255,255,255,.38);border-radius:999px;background:rgba(255,255,255,.11);backdrop-filter:blur(14px)}
     .nav a{font-size:11px;font-weight:600;letter-spacing:.06em;padding:10px 17px;border-radius:999px;transition:background .18s,color .18s}
     .nav a:hover,.nav a.active{color:#17251d;background:#f4eee1}
-    .menu{border-radius:999px;height:46px;padding:0 22px;border:1px solid rgba(255,255,255,.65);background:var(--ivory);color:#1c2b23;font-weight:700;font-size:11px;letter-spacing:.075em;transition:transform .2s,background .2s}
+    .menu{display:inline-flex;align-items:center;justify-content:center;border-radius:999px;height:46px;padding:0 22px;border:1px solid rgba(255,255,255,.65);background:var(--ivory);color:#1c2b23;font-weight:700;font-size:11px;letter-spacing:.075em;transition:transform .2s,background .2s}
     .menu:hover{transform:translateY(-2px);background:#fff}
     .logo{position:fixed;z-index:25;top:50%;left:50%;width:68px;height:68px;transform:translate(-50%,-50%);transition:left 1.8s cubic-bezier(.16,1,.3,1),top 1.8s cubic-bezier(.16,1,.3,1),width 1.8s cubic-bezier(.16,1,.3,1),height 1.8s cubic-bezier(.16,1,.3,1),transform 1.8s cubic-bezier(.16,1,.3,1);filter:drop-shadow(0 3px 18px rgba(0,0,0,.17))}
     .logo.is-docked{left:clamp(22px,3.2vw,54px);top:26px;width:48px;height:48px;transform:none}
@@ -93,10 +93,10 @@
     .fact:last-child{border-bottom:0}
     .fact dt{font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#e9d6ba}
     .fact dd{margin:0;line-height:1.55;color:rgba(255,255,255,.9)}
-    .content-actions{display:flex;align-items:center;gap:21px;margin-top:17px}
-    .content-actions button{border:0;background:none;padding:0;color:#fff;display:inline-flex;gap:10px;align-items:center;text-transform:uppercase;font-size:10px;font-weight:700;letter-spacing:.12em;transition:opacity .2s}
-    .content-actions button:hover{opacity:.68}
-    .content-actions button:first-child{border-bottom:1px solid rgba(255,255,255,.7);padding-bottom:7px}
+    .content-actions{display:flex;align-items:center;gap:21px;margin-top:17px;flex-wrap:wrap}
+    .content-actions a{border:0;background:none;padding:0;color:#fff;display:inline-flex;gap:10px;align-items:center;text-transform:uppercase;font-size:10px;font-weight:700;letter-spacing:.12em;transition:opacity .2s}
+    .content-actions a:hover{opacity:.68}
+    .content-actions a:first-child{border-bottom:1px solid rgba(255,255,255,.7);padding-bottom:7px}
     .corner-label{position:absolute;right:clamp(22px,3.2vw,54px);top:125px;z-index:5;font-size:10px;letter-spacing:.16em;text-transform:uppercase;line-height:1.75;text-align:right;color:rgba(255,255,255,.65)}
     .corner-label strong{display:block;color:#fff;font-size:11px;font-weight:600;letter-spacing:.12em}
     .transition-layer{display:none}.scene-canvas{display:none}
@@ -129,28 +129,9 @@
     @keyframes title-rise{from{opacity:0;filter:blur(12px);transform:translateY(46px)}to{opacity:1;filter:blur(0);transform:translateY(0)}}
     @keyframes rise-in{from{opacity:0;filter:blur(7px);transform:translateY(20px)}to{opacity:1;filter:blur(0);transform:translateY(0)}}
     @keyframes menu-row{from{opacity:.4;transform:translateX(-8px)}to{opacity:1;transform:translateX(0)}}
-    /* Drawers use real text and real actions, not prototype dead ends. */
-    .drawer{position:fixed;inset:0;z-index:110;background:rgba(3,10,8,.7);backdrop-filter:blur(11px);display:grid;place-items:center;padding:22px;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}
-    .drawer.is-open{opacity:1;visibility:visible}
-    .drawer-box{position:relative;max-height:min(90svh,760px);overflow:auto;width:min(700px,100%);background:#f2eee5;color:#1b3229;padding:clamp(27px,4vw,55px);border-radius:2px;box-shadow:0 35px 90px rgba(0,0,0,.45);transform:translateY(25px);transition:transform .4s cubic-bezier(.16,1,.3,1)}
-    .drawer.is-open .drawer-box{transform:translateY(0)}
-    .drawer-close{position:absolute;right:20px;top:18px;background:none;border:1px solid rgba(28,47,39,.3);border-radius:50%;width:38px;height:38px;color:#1b3229;font-size:21px}
-    .drawer-eyebrow{font-size:10px;font-weight:700;letter-spacing:.21em;text-transform:uppercase;color:#a27c55;margin:0 0 18px}
-    .drawer h2{font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-size:clamp(43px,6vw,72px);line-height:1.02;font-weight:400;letter-spacing:-.015em;margin:0 0 18px;text-transform:uppercase}
-    .drawer p{font-size:14px;line-height:1.9;color:#5b665e}
-    .drawer ul{list-style:none;padding:0;margin:25px 0}
-    .drawer li{padding:14px 0;display:flex;gap:19px;border-bottom:1px solid #d8d2c6;font-size:13px;line-height:1.7}
-    .drawer li b{font-size:10px;color:#a48056;min-width:26px}
-    .drawer-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:25px 0}
-    .drawer-grid a,.drawer-grid button{display:flex;justify-content:space-between;align-items:center;text-align:left;gap:12px;background:#e4d9c5;padding:17px;color:#203a2e;border:0;font-size:12px;font-weight:700}
-    .drawer-primary{display:inline-flex;justify-content:center;align-items:center;gap:18px;border:0;background:#192e24;color:#fff;padding:16px 23px;margin-top:14px;font-size:12px;font-weight:700;letter-spacing:.065em;text-transform:uppercase}
-    .drawer-small{font-size:11px!important;line-height:1.65!important}
-    .drawer label{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.12em;font-weight:700;margin-top:20px}
-    .drawer textarea{width:100%;resize:vertical;min-height:110px;background:#fff;border:1px solid #c9c6bb;padding:14px;margin-top:9px;color:#1d352b;font-size:14px;line-height:1.6}
-    .drawer summary{cursor:pointer;font-size:13px;font-weight:700;padding:15px 0;border-bottom:1px solid #d8d2c6}
-    .drawer details p{font-size:12px;margin:10px 0}
     .prototype-note{position:absolute;left:50%;transform:translateX(-50%);top:17px;z-index:19;color:rgba(255,255,255,.52);font-size:8px;letter-spacing:.16em;text-transform:uppercase;white-space:nowrap}
     @media(hover:hover) and (pointer:fine){.preload-complete .experience,.preload-complete .experience button,.preload-complete .experience a{cursor:none!important}}
+    @media(max-width:1200px){.nav{gap:0;padding:3px}.nav a{font-size:10px;padding:10px 11px}.header{inset:19px 24px auto}.brand-name strong{font-size:11px}}
     @media(max-width:1020px){
       .portal-wrap{left:53%;width:min(300px,36vw)}
       .planet-content h1{font-size:clamp(105px,16vw,200px)}
@@ -160,6 +141,7 @@
       .side{top:42%}
       .brand-name strong{font-size:12px}
     }
+    @media(max-width:1020px){.nav{display:none}}
     @media(max-width:760px){
       .nav{display:none}
       .header{top:18px;left:18px;right:18px}
@@ -210,7 +192,7 @@
       .byline{margin-top:11px;font-size:8px}
       .content-actions{gap:18px}
       .content-actions button{font-size:9px}
-      .drawer-grid{grid-template-columns:1fr}
+      .content-actions{gap:10px 16px}
     }
     @media(max-width:370px) and (max-height:730px){
       .portal-wrap{top:39%;width:180px}
@@ -251,16 +233,19 @@
 
     <header class="header chrome">
       <div class="logo-slot"></div>
-      <a class="brand-name" href="#experience" id="brand" aria-label="Carnets et Horizons — Accueil">
+      <a class="brand-name" href="index.html" id="brand" aria-label="Carnets et Horizons — Accueil">
         <span><strong>Carnets <span style="color:var(--gold)">&</span> Horizons</strong><small>AmericaTravel · EuropaTravel</small></span>
       </a>
       <div class="header-actions">
         <nav class="nav" aria-label="Navigation principale">
-          <a href="#concept" data-panel="concept" class="active">Le concept</a>
-          <a href="#prestations" data-panel="prestations">Prestations</a>
-          <a href="#faq" data-panel="faq">Questions</a>
+          <a href="amerique.html">Amérique</a>
+          <a href="europe.html">Europe</a>
+          <a href="concept.html">Le concept</a>
+          <a href="methode.html">Méthode</a>
+          <a href="prestations.html">Prestations</a>
+          <a href="faq.html">Questions</a>
         </nav>
-        <button class="menu" id="menu-button" type="button" data-panel="menu">MENU <span style="margin-left:8px">↗</span></button>
+        <a class="menu" href="contact.html">MON VOYAGE <span style="margin-left:8px">↗</span></a>
       </div>
     </header>
 
@@ -288,8 +273,9 @@
         <h1 id="planet-title" data-long="true">AMÉRIQUE</h1>
         <div class="byline" id="title-byline">DES ROUTES MYTHIQUES, UNE AVENTURE QUI VOUS RESSEMBLE.</div>
         <div class="content-actions">
-          <button type="button" data-panel="concept">DÉCOUVRIR LE CONCEPT <span>↗</span></button>
-          <button type="button" data-panel="contact">IMAGINER MON VOYAGE <span>↗</span></button>
+          <a id="destination-page-link" href="amerique.html">DÉCOUVRIR AMERICATRAVEL <span>↗</span></a>
+          <a href="concept.html">LE CONCEPT <span>↗</span></a>
+          <a href="contact.html">MON VOYAGE <span>↗</span></a>
         </div>
       </div>
       <dl class="facts" id="facts">
@@ -302,13 +288,6 @@
     <div class="loading" id="loading" aria-live="polite">PRÉPARATION DE VOTRE HORIZON…</div>
     <div class="custom-cursor" id="custom-cursor" aria-hidden="true"><span class="cursor-orbit"></span><span class="cursor-dot"></span><span class="cursor-label">EXPLORER</span></div>
   </main>
-
-  <div class="drawer" id="drawer" role="presentation">
-    <div class="drawer-box" role="dialog" aria-modal="true" aria-labelledby="drawer-title" tabindex="-1">
-      <button class="drawer-close" id="drawer-close" type="button" aria-label="Fermer">×</button>
-      <div id="drawer-content"></div>
-    </div>
-  </div>
 
   <script>
   (function(){
@@ -361,13 +340,10 @@
     var countValue = document.getElementById('preloader-value');
     var logo = document.getElementById('floating-logo');
     var cursor = document.getElementById('custom-cursor');
-    var drawer = document.getElementById('drawer');
-    var drawerBox = drawer.querySelector('.drawer-box');
-    var drawerContent = document.getElementById('drawer-content');
     var reduced = matchMedia('(prefers-reduced-motion: reduce)');
     var current='amerique',busy=false,firstRender=true,maskScale=0,expansion=0,rotX=0,rotY=0,targetX=0,targetY=0;
     var canvasOpacity=1,frameLast=0,drawActive=true,preloadDone=false,drawWidth=0,drawHeight=0;
-    var images={},loadPromises={},lastFocus=null,focusTrap=null;
+    var images={},loadPromises={};
     var finePointer=matchMedia('(pointer:fine)').matches;
     var cursorX=0,cursorY=0,cursorActualX=0,cursorActualY=0,cursorShown=false;
     var ease=function(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;};
@@ -393,6 +369,9 @@
       document.getElementById('title-byline').textContent=s.byline;
       document.getElementById('next-name').textContent=s.nextName;
       document.getElementById('next-number').textContent=s.nextNumber;
+      var universeLink=document.getElementById('destination-page-link');
+      universeLink.href=current+'.html';
+      universeLink.firstChild.textContent='DÉCOUVRIR '+s.brand+' ';
       portal.setAttribute('aria-label','Explorer '+(s.next==='europe'?'l’Europe':'l’Amérique du Nord'));
       facts.replaceChildren();
       s.facts.forEach(function(pair){
@@ -572,64 +551,14 @@
       preloaderVideo.load();
     }
 
-    function escapeHTML(value){return value.replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
-    function drawerTemplates(which){
-      var heading='<div class="drawer-eyebrow">Carnets & Horizons · Maquette</div>';
-      if(which==='concept')return heading+'<h2>Le monde est vaste.<br>Votre voyage est unique.</h2><p>Je suis Maurice, Travel Planner. Mon métier : imaginer et organiser des itinéraires sur mesure, sans vendre directement de vols, d’hôtels ni d’activités. Vous restez libre de réserver auprès de chaque prestataire.</p><ul><li><b>01</b><span><strong>Un premier échange gratuit.</strong><br>Nous précisons vos envies, votre budget, vos dates et votre rythme.</span></li><li><b>02</b><span><strong>La recherche et la création.</strong><br>Je construis votre itinéraire et prépare des suggestions personnalisées.</span></li><li><b>03</b><span><strong>Votre carnet et votre liberté.</strong><br>Vous effectuez les réservations puis partez avec vos informations et conseils.</span></li></ul><button type="button" class="drawer-primary" data-panel="contact">PARLONS DE VOTRE VOYAGE ↗</button>';
-      if(which==='prestations')return heading+'<h2>Deux horizons.<br>Un accompagnement sur mesure.</h2><p>AmericaTravel est dédié à l’Amérique du Nord ; EuropaTravel propose des itinéraires et séjours en Europe. Les offres sont définies selon le nombre de voyageurs, la durée et la complexité du projet.</p><div class="drawer-grid"><a href="https://americatravel.fr/" target="_blank" rel="noopener noreferrer">DÉCOUVRIR AMERICATRAVEL <span>↗</span></a><a href="https://europatravel.fr/" target="_blank" rel="noopener noreferrer">DÉCOUVRIR EUROPATRAVEL <span>↗</span></a></div><ul><li><b>01</b><span><strong>Conception d’itinéraires personnalisés.</strong><br>City trips, découvertes et road trips selon vos envies.</span></li><li><b>02</b><span><strong>Carnet de voyage.</strong><br>Vos étapes, bonnes adresses et informations pratiques regroupées.</span></li><li><b>03</b><span><strong>Des réservations en direct.</strong><br>Aucun forfait de transport ou d’hébergement vendu par le Travel Planner.</span></li></ul><p class="drawer-small">Tarifs et conditions à confirmer par Maurice avant publication commerciale.</p><button type="button" class="drawer-primary" data-panel="contact">DEMANDER UNE PROPOSITION ↗</button>';
-      if(which==='faq')return heading+'<h2>Quelques réponses<br>avant le départ.</h2><details open><summary>Est-ce une agence de voyage ?</summary><p>Non. Le Travel Planner conseille, recherche et prépare un parcours personnalisé ; vous achetez directement vos prestations auprès des fournisseurs.</p></details><details><summary>Qui effectue les réservations ?</summary><p>Vous effectuez les réservations vous-même via les liens et informations proposés par Maurice.</p></details><details><summary>Le premier contact est-il payant ?</summary><p>Non. Un premier échange permet de comprendre votre projet, gratuitement et sans engagement.</p></details><details><summary>Le voyage est-il personnalisé ?</summary><p>Oui. Le parcours est conçu selon vos envies, votre rythme et votre budget.</p></details><button type="button" class="drawer-primary" data-panel="contact">IMAGINER MON VOYAGE ↗</button>';
-      if(which==='menu')return heading+'<h2>Le voyage commence<br>par une envie.</h2><div class="drawer-grid"><button data-panel="concept" type="button">NOTRE CONCEPT ↗</button><button data-panel="prestations" type="button">LES PRESTATIONS ↗</button><button data-select="amerique" type="button">AMERICATRAVEL ↗</button><button data-select="europe" type="button">EUROPATRAVEL ↗</button><button data-panel="faq" type="button">QUESTIONS FRÉQUENTES ↗</button><button data-panel="contact" type="button">PARLONS DE VOTRE PROJET ↗</button></div><p>Une identité commune proposée pour réunir deux expertises : l’Amérique du Nord et l’Europe.</p>';
-      if(which==='contact')return heading+'<h2>Et si nous imaginions<br>votre prochain voyage ?</h2><p>Le premier contact est gratuit et sans engagement. Décrivez votre idée ci-dessous, puis ouvrez un e-mail préparé. Aucun message n’est envoyé automatiquement par cette maquette.</p><form id="contact-form"><label for="travel-description">VOTRE PROJET</label><textarea id="travel-description" maxlength="1200" required placeholder="Une destination, des dates, vos envies, votre budget…"></textarea><button class="drawer-primary" type="submit">PRÉPARER MON E-MAIL ↗</button><p class="drawer-small">Votre texte reste sur votre appareil jusqu’à ce que vous décidiez de l’envoyer dans votre messagerie.</p></form>';
-      return '';
-    }
-    function openDrawer(kind){
-      lastFocus=document.activeElement;
-      drawerContent.innerHTML=drawerTemplates(kind);
-      drawer.classList.add('is-open');
-      document.body.style.overflow='hidden';
-      document.getElementById('drawer-close').focus();
-      if(kind==='contact'){
-        var area=document.getElementById('travel-description');
-        area.value=current==='amerique'?'Bonjour, je souhaite organiser un voyage en Amérique du Nord.':'Bonjour, je souhaite organiser un voyage en Europe.';
-        document.getElementById('contact-form').addEventListener('submit',function(event){
-          event.preventDefault();
-          var description=area.value.trim();
-          if(!description){area.focus();return;}
-          var address=STATES[current].contact;
-          var subject=encodeURIComponent('Projet de voyage sur mesure — '+STATES[current].brand);
-          var body=encodeURIComponent('Bonjour Maurice,\n\n'+description+'\n\nMerci pour votre retour.\n');
-          window.location.href='mailto:'+address+'?subject='+subject+'&body='+body;
-        });
-      }
-    }
-    function closeDrawer(){
-      drawer.classList.remove('is-open');
-      document.body.style.overflow='';
-      if(lastFocus&&lastFocus.focus)lastFocus.focus();
-    }
-    document.addEventListener('click',function(event){
-      var opener=event.target.closest('[data-panel]');
-      if(opener){event.preventDefault();if(drawer.classList.contains('is-open'))closeDrawer();openDrawer(opener.dataset.panel);return;}
-      var choice=event.target.closest('[data-select]');
-      if(choice){closeDrawer();travel(choice.dataset.select);return;}
-      var destinationButton=event.target.closest('[data-go]');
-      if(destinationButton){travel(destinationButton.dataset.go);return;}
-      if(event.target===drawer)closeDrawer();
-    });
-    document.getElementById('drawer-close').addEventListener('click',closeDrawer);
-    document.addEventListener('keydown',function(event){
-      if(event.key==='Escape'&&drawer.classList.contains('is-open'))closeDrawer();
-      if(event.key==='Tab'&&drawer.classList.contains('is-open')){
-        var nodes=Array.from(drawerBox.querySelectorAll('a[href],button:not([disabled]),textarea:not([disabled]),summary'));
-        var first=nodes[0],last=nodes[nodes.length-1];
-        if(first&&last&&event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus();}
-        else if(first&&last&&!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}
-      }
-      if(event.key==='ArrowRight'&&!drawer.classList.contains('is-open'))travel(STATES[current].next);
+    document.querySelectorAll('[data-go]').forEach(function(button){
+      button.addEventListener('click',function(){travel(button.dataset.go);});
     });
     portal.addEventListener('click',function(){travel(STATES[current].next);});
     document.getElementById('skip-intro').addEventListener('click',finishPreloader);
-    document.getElementById('brand').addEventListener('click',function(event){event.preventDefault();travel('amerique');});
+    document.addEventListener('keydown',function(event){
+      if(event.key==='ArrowRight' && event.target===document.body)travel(STATES[current].next);
+    });
 
     if(finePointer){
       experience.addEventListener('pointermove',function(event){
