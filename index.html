@@ -149,7 +149,7 @@
     .drawer summary{cursor:pointer;font-size:13px;font-weight:700;padding:15px 0;border-bottom:1px solid #d8d2c6}
     .drawer details p{font-size:12px;margin:10px 0}
     .prototype-note{position:absolute;left:50%;transform:translateX(-50%);top:17px;z-index:19;color:rgba(255,255,255,.52);font-size:8px;letter-spacing:.16em;text-transform:uppercase;white-space:nowrap}
-    @media(hover:hover) and (pointer:fine){.experience,.experience button,.experience a{cursor:none!important}}
+    @media(hover:hover) and (pointer:fine){.preload-complete .experience,.preload-complete .experience button,.preload-complete .experience a{cursor:none!important}}
     @media(max-width:1020px){
       .portal-wrap{left:53%;width:min(300px,36vw)}
       .planet-content h1{font-size:clamp(105px,16vw,200px)}
@@ -191,6 +191,7 @@
       .skip-intro{bottom:32px;right:20px}
       .prototype-note{font-size:7px;top:8px}
     }
+    @media(max-width:640px){.side{display:none}}
     @media(max-width:500px){
       .brand-name strong{font-size:9px}
       .brand-name small{font-size:7px}
@@ -249,7 +250,7 @@
 
     <header class="header chrome">
       <div class="logo-slot"></div>
-      <a class="brand-name" href="#accueil" id="brand" aria-label="Carnets et Horizons — Accueil">
+      <a class="brand-name" href="#experience" id="brand" aria-label="Carnets et Horizons — Accueil">
         <span><strong>Carnets <span style="color:var(--gold)">&</span> Horizons</strong><small>AmericaTravel · EuropaTravel</small></span>
       </a>
       <div class="header-actions">
@@ -627,7 +628,7 @@
     });
     portal.addEventListener('click',function(){travel(STATES[current].next);});
     document.getElementById('skip-intro').addEventListener('click',finishPreloader);
-    document.getElementById('brand').addEventListener('click',function(event){event.preventDefault();openDrawer('concept');});
+    document.getElementById('brand').addEventListener('click',function(event){event.preventDefault();travel('amerique');});
 
     if(finePointer){
       experience.addEventListener('pointermove',function(event){
