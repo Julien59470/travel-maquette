@@ -22,14 +22,18 @@ https://julien59470.github.io/travel-maquette/
 - Navigation mobile, animations respectant la réduction de mouvement, liens accessibles ;
 - Balise noindex,nofollow pour ne pas concurrencer les sites existants pendant la démonstration.
 
-## Publication GitHub Pages (sans build, sans abonnement)
+## Publication GitHub Pages via GitHub Actions
 
-1. Ouvrir **Settings → Pages** dans le dépôt GitHub.
-2. Dans **Build and deployment**, choisir **Deploy from a branch**.
-3. Sélectionner la branche **main**, dossier **/(root)**, puis **Save**.
-4. Attendre la fin de la publication affichée dans l'onglet **Actions** puis ouvrir l'URL ci-dessus.
+Le déploiement est défini dans `.github/workflows/deploy-pages.yml`, sans outil de build ni dépendance.
 
-Tous les fichiers nécessaires sont à la racine ; .nojekyll évite les traitements Jekyll inutiles. Aucun déploiement externe, API payante ou base de données.
+1. Dans **Settings → Pages → Build and deployment → Source**, sélectionner **GitHub Actions** (et non `Deploy from a branch`). La sélection de cette source dans les paramètres est indispensable et ne peut pas être modifiée par le workflow avec son jeton GitHub standard.
+2. Dès que la source est configurée, le workflow **Deploy Travel Maquette to GitHub Pages** s'exécute automatiquement après chaque push sur `main`, ou manuellement via **Actions → Deploy Travel Maquette to GitHub Pages → Run workflow**.
+3. Vérifier le statut du déploiement dans **Actions**.
+4. Ouvrir https://julien59470.github.io/travel-maquette/ lorsque le workflow est vert.
+
+Le workflow valide les fichiers essentiels, prépare un dossier `_site` limité aux fichiers publics et déploie ce dossier avec `actions/configure-pages`, `actions/upload-pages-artifact` et `actions/deploy-pages`. Le `GITHUB_TOKEN` reçoit les permissions minimales de déploiement `pages: write` et `id-token: write` ainsi que `contents: read`.
+
+**Dépannage :** si le job `Configure GitHub Pages` échoue avec une erreur indiquant que Pages n'est pas activé, vérifier que la source est bien **GitHub Actions** dans **Settings → Pages**. Si le job de déploiement est bloqué, consulter les règles de protection de l'environnement `github-pages`. Il n'est pas nécessaire de créer une branche `gh-pages`.
 
 ## Limites de la proposition
 
