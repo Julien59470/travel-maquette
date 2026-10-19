@@ -49,6 +49,14 @@ jobs:
           cp index.html _site/index.html
           touch _site/.nojekyll
           test -s _site/index.html
+      - name: Check demo video availability
+        shell: bash
+        run: |
+          status=$(curl -L -s -o /dev/null -w '%{http_code}' -I --max-time 15 'https://cdn.coverr.co/videos/coverr-stream-next-to-the-road-4482/1080p.mp4' || true)
+          echo "External video HTTP status: $status"
+          if [ "$status" != "200" ] && [ "$status" != "206" ]; then
+            echo 'Note: the demo will fall back to its cinematic still image.'
+          fi
       - name: Upload static site artifact
         uses: actions/upload-pages-artifact@v4
         with:
