@@ -2,52 +2,60 @@ name: Deploy Travel Maquette to GitHub Pages
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
   workflow_dispatch:
 
 permissions:
   contents: read
 
 concurrency:
-  group: travel-pages
+  group: travel-maquette-pages
   cancel-in-progress: true
 
 jobs:
   build:
-    name: Build and validate React app
+    name: Validate standalone HTML
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout sources
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
           persist-credentials: false
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-      - name: Install dependencies
-        run: npm install --no-audit --no-fund
-      - name: Type-check and bundle with Vite
-        run: npm run build
-      - name: Validate GitHub Pages output
+      - name: Validate HTML and inline JS
         shell: bash
         run: |
           set -euo pipefail
-          test -s dist/index.html
-          test -d dist/assets
-          test -s dist/favicon.svg
-          grep -q '/travel-maquette/assets/' dist/index.html
-          test -n "$(find dist/assets -type f -name '*.js' -print -quit)"
-          test -n "$(find dist/assets -type f -name '*.css' -print -quit)"
-          touch dist/.nojekyll
-      - name: Upload compiled site
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          from html.parser import HTMLParser
+          source = Path('index.html').read_text(encoding='utf-8')
+          assert source.startswith('<!doctype html>'), 'index.html absent ou incorrect'
+          assert source.count('<style>') == 1 and source.count('<script>') == 1, 'La maquette doit rester autonome'
+          assert 'noindex,nofollow' in source, 'La maquette ne doit pas être indexée'
+          assert 'id="portal-canvas"' in source and 'id="preloader-video"' in source, 'Portail ou preloader absent'
+          assert not re.search(r'<script[^>]+src=', source), 'JavaScript externe interdit'
+          assert not re.search(r'<link[^>]+rel="stylesheet"[^>]+href="/(?:src|assets)', source), 'Build requis'
+          match = re.search(r'<script>\s*([\s\S]*?)</script>', source)
+          assert match, 'JavaScript inline introuvable'
+          Path('/tmp/travel-inline.js').write_text(match.group(1), encoding='utf-8')
+          class CheckHTML(HTMLParser):
+              def error(self, message): raise ValueError(message)
+          CheckHTML().feed(source)
+          print('Autonomous HTML validated: ', len(source), 'bytes')
+          PY
+          node --check /tmp/travel-inline.js
+          mkdir -p _site
+          cp index.html _site/index.html
+          touch _site/.nojekyll
+          test -s _site/index.html
+      - name: Upload static site artifact
         uses: actions/upload-pages-artifact@v4
         with:
-          path: dist
+          path: _site
 
   deploy:
-    name: Deploy to Pages
+    name: Publish GitHub Pages
     needs: build
     runs-on: ubuntu-latest
     permissions:
@@ -57,8 +65,8 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Configure GitHub Pages
+      - name: Configure Pages
         uses: actions/configure-pages@v5
-      - name: Publish artifact
+      - name: Deploy artifact
         id: deployment
         uses: actions/deploy-pages@v4
