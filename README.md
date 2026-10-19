@@ -1,71 +1,45 @@
-# Carnets & Horizons — maquette React Travel Planner
+# Carnets & Horizons — maquette cinématique
 
-Concept créatif de fusion **AmericaTravel + EuropaTravel**, dédié au métier de **Travel Planner (organisateur de voyages)**. La maquette met en scène une nouvelle identité éditoriale provisoire : « Carnets & Horizons ».
+Maquette conceptuelle réunissant **AmericaTravel** (Amérique du Nord) et **EuropaTravel** (Europe), avec une identité ombrelle provisoire et une expérience de navigation inspirée d'un portail cinématique.
 
-## Démo
+**Démo** : https://julien59470.github.io/travel-maquette/
 
-**https://julien59470.github.io/travel-maquette/**
+## Stack, diffusion et coût
 
-Source de publication : **GitHub Actions**, workflow [deploy-pages.yml](.github/workflows/deploy-pages.yml), déclenché à chaque push sur `main`. La source doit être **GitHub Actions** dans Settings → Pages.
+- **Un seul fichier `index.html` autonome**, contenant le HTML, les styles CSS et le JavaScript natif.
+- Aucun framework, compilation, serveur, API ou abonnement requis.
+- Déploiement automatique via **GitHub Actions → GitHub Pages** à chaque push sur `main`.
+- Le workflow valide le HTML, extrait le JavaScript intégré et exécute `node --check` avant publication.
+- Les images et la vidéo de démonstration sont chargées depuis des services externes ; leur chargement dépend du réseau.
 
-## Stack
+## Expérience interactive
 
-- React + TypeScript
-- Vite avec `base: '/travel-maquette/'` et alias `@/ → src/`
-- Tailwind CSS 3, configuration dédiée
-- lucide-react, Google Fonts : Geist et Special Elite
-- GitHub Actions → `npm run build` → `dist/` → Pages
-- Aucune API, base de données, IA ni abonnement requis pour la maquette
+- Introduction visuelle d'environ trois secondes, vidéo, compteur 0-100 % et logo qui rejoint l'en-tête ; bouton pour passer l'introduction.
+- Navigation principale et panneau informatif au clavier (Escape / Tab).
+- Deux univers : **Amérique du Nord** et **Europe**, destinations sélectionnables depuis la barre latérale.
+- Portail central animé en Canvas : masque arrondi, profondeur simulée et inclinaison douce à la souris.
+- Clic sur le portail : agrandissement plein écran et transition vers l'autre destination.
+- Typographie monumentale, fiche descriptive et appels à l'action contextualisés.
+- Panneaux d'explication : concept Travel Planner, prestations, questions, demande de projet.
+- Préparation d'un e-mail depuis le formulaire ; **aucune donnée envoyée automatiquement ni conservée côté serveur**.
+- Respect des préférences `prefers-reduced-motion`, prise en charge des mobiles et boutons accessibles.
 
-## Démarrer localement
+## Références métier
 
-```bash
-npm install
-npm run dev
-npm run build
-npm run preview
-```
+- AmericaTravel : https://americatravel.fr/
+- EuropaTravel : https://europatravel.fr/
+- Maurice conçoit des itinéraires et des carnets de voyage ; le voyageur réserve auprès des prestataires.
+- Les e-mails de contact de démonstration sont ceux publiés sur les sites actuels et restent à valider avant publication définitive.
 
-Le workflow GitHub compile et vérifie la sortie Vite avant publication.
+## Préproduction
 
-## Expérience
+- « Carnets & Horizons » n'est qu'une **proposition de nom** ; vérifier marque et domaine avant adoption.
+- La maquette est **volontairement non indexable** (`noindex,nofollow`) pour éviter la concurrence avec les sites actuels.
+- Les vidéos et photos de démonstration viennent d'URL externes. Sécuriser les licences, autorisations, l'hébergement et les performances avant mise en production.
+- La vidéo de chargement dispose d'un visuel et d'une minuterie de repli si elle ne se charge pas.
+- Ceci représente une **maquette d'accueil** ; ce n'est pas encore la réalisation du site complet, des pages légales ou d'une migration SEO.
+- Les devis, formulaires connectés, redirections 301, Search Console et pages définitives relèvent d'une phase de réalisation.
 
-- Landing page plein écran, vidéo de fond selon le brief et **image de secours** si la vidéo distante est indisponible
-- Halo blanc en haut et verre liquide sur la carte de demande
-- Sélection Amérique du Nord ou Europe mettant à jour le texte d'exemple
-- Texte libre éditable pour présenter son projet
-- Sélection locale d'une image ou d'un PDF (**non envoyé / non stocké**)
-- Panneaux interactifs « Notre approche », « Prestations » et « Questions fréquentes »
-- Bouton « Imaginer mon voyage » ouvrant un récapitulatif et un brouillon d'e-mail envoyé **uniquement si le visiteur choisit de l'envoyer via sa propre messagerie**
-- Tarifs et adresses de contact initialement repris des sites existants ; **à revalider avant production**
-- Accessibilité : labels, focus clavier, fermeture Échap, préférences de réduction des animations, boutons réellement interactifs
-- Responsivité mobile, tablette et ordinateur
+## Publier
 
-## Précautions
-
-- Maquette **non indexable** (`noindex,nofollow`) : ne pas la confondre avec un site publié officiellement.
-- La vidéo référencée vient du domaine externe fourni dans le brief. Son accessibilité et ses droits d'utilisation ne sont pas garantis ; **une image de remplacement est prévue**. Vérifier les licences et remplacer les médias par des fichiers autorisés pour le site final.
-- Identité « Carnets & Horizons » **provisoire**, à vérifier (marque, domaine, accord du client).
-- Aucune réservation, paiement ou génération automatique d'itinéraire.
-- Ce dépôt illustre **une page d'accueil interactive**, pas encore les six pages contractuelles, ni la migration SEO définitive.
-- Pour le futur site : choix du domaine, redirections 301 URL par URL, pages légales, consentements, formulaire fiable, Search Console, analyse des contenus et hébergement des visuels sous contrôle.
-
-## Arborescence
-
-```text
-index.html
-vite.config.ts
-tailwind.config.js
-postcss.config.js
-tsconfig.json
-package.json
-src/
-  main.tsx
-  App.tsx
-  index.css
-  components/Hero.tsx
-public/
-  favicon.svg
-.github/workflows/
-  deploy-pages.yml
-```
+Dans le dépôt GitHub : **Settings → Pages → Source : GitHub Actions**. Ensuite, chaque push sur `main` déploie le fichier `index.html` et `.nojekyll` par le workflow `.github/workflows/deploy-pages.yml`.
