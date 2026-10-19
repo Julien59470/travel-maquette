@@ -1,0 +1,152 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: 'Geist', sans-serif;
+  color: #1a1a1a;
+  background: #ffffff;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  --carnet-ink: #1a1a1a;
+  --carnet-forest: #173a32;
+  --carnet-terra: #905831;
+}
+html { scroll-behavior: smooth; }
+body { margin: 0; font-family: 'Geist', sans-serif; overflow-x: hidden; background: #fff; }
+button, textarea { font-family: inherit; }
+button { -webkit-tap-highlight-color: transparent; }
+button:focus-visible, a:focus-visible, textarea:focus-visible { outline: 2px solid #173a32; outline-offset: 3px; }
+::selection { background: #c8a888; color: #1b3129; }
+
+/* A warm, cinematic portrait of the two existing travel brands. */
+.travel-hero {
+  isolation: isolate;
+  background-color: #d9ded6;
+}
+.travel-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: .24;
+  background-image: repeating-linear-gradient(0deg, transparent 0, transparent 3px, rgba(255,255,255,.03) 4px);
+  mix-blend-mode: overlay;
+}
+.hero-intro { animation: intro-rise 850ms cubic-bezier(.2,.7,.3,1) both; }
+.hero-heading { text-wrap: balance; }
+.headline-emphasis { color: #263e35; }
+.liquid-card {
+  isolation: isolate;
+  background: linear-gradient(140deg, rgba(255,255,255,.20) 0%, rgba(255,255,255,.07) 60%, rgba(255,255,255,.15) 100%);
+  box-shadow:
+    0 0 4px rgba(0,0,0,.10),
+    0 28px 80px rgba(20,39,32,.08),
+    inset 0 1px 0 rgba(255,255,255,.65);
+}
+.liquid-card::before {
+  content:'';
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:-1;
+  background:
+    radial-gradient(circle at 5% -40%, rgba(255,255,255,.70), transparent 55%),
+    radial-gradient(circle at 100% 120%, rgba(255,255,255,.18), transparent 50%);
+}
+.glass-orbit { box-shadow: 0 4px 18px rgba(255,255,255,.13); }
+.glass-textarea {
+  scrollbar-color: rgba(65,85,71,.35) transparent;
+  scrollbar-width: thin;
+}
+.glass-textarea:focus { outline: none; box-shadow: none; }
+.glass-textarea::selection { background: rgba(177,133,95,.28); }
+.glass-submit { box-shadow: 0 3px 0 rgba(255,255,255,.11) inset, 0 10px 30px rgba(12,29,24,.15); }
+.glass-submit:hover { transform: translateY(-2px); }
+.destination-tile {
+  min-height: 138px;
+  border: 1px solid rgba(255,255,255,.40);
+  box-shadow: 0 12px 35px rgba(10,21,18,.16);
+}
+.destination-tile-selected {
+  outline: 2px solid rgba(255,255,255,.9);
+  outline-offset: 2px;
+}
+.destination-tile:hover { transform: translateY(-2px); border-color: rgba(255,255,255,.9); }
+.brand-tile-title { font-family: 'Geist', sans-serif; }
+.nav-link::after {
+  content: ''; height: 1px; background: currentColor;
+  position: absolute; bottom: -8px; left: 0; right: 100%;
+  transition: right 240ms ease;
+}
+.nav-link:hover::after { right: 0; }
+.panel-enter { animation: panel-appear 250ms cubic-bezier(.2,.7,.2,1) both; }
+.panel-primary {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap: 18px;
+  border:0;
+  border-radius: 999px;
+  padding: 15px 22px;
+  background: #172d27;
+  color:#fff;
+  font-family:'Geist', sans-serif;
+  font-weight:600;
+  font-size:13px;
+  cursor:pointer;
+  transition: background .2s,transform .2s;
+}
+.panel-primary:hover { background:#30594b; transform:translateY(-2px); }
+.panel-primary:active { transform:scale(.98); }
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary { list-style: none; }
+.faq-item[open] { background: #fffdf8; }
+@keyframes intro-rise {
+  from { opacity:0; transform:translateY(20px); }
+  to { opacity:1; transform:translateY(0); }
+}
+@keyframes panel-appear {
+  from { opacity:0; transform:translateY(16px) scale(.985); }
+  to { opacity:1; transform:translateY(0) scale(1); }
+}
+
+@media (min-width:1024px) and (max-height:880px) {
+  .travel-hero main { padding-top: 22px; }
+  .hero-heading { font-size: clamp(40px, 5vw, 70px); }
+  .travel-hero .hero-intro p { margin-top: 13px; }
+  .travel-hero .liquid-card { min-height: 210px; }
+  .travel-hero .glass-textarea { height: 78px; }
+  .travel-hero #destinations { padding-top: 26px; }
+  .travel-hero .destination-tile { min-height: 108px; }
+}
+@media (max-width:760px) {
+  .travel-hero { min-height: 100svh; }
+  .travel-hero .hero-intro { max-width: 560px; }
+  .travel-hero .hero-heading { letter-spacing:-.052em; }
+  .liquid-card { backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+  .destination-tile { min-height: 108px; }
+  .brand-tile-title { font-size: 21px; }
+}
+@media (max-width:490px) {
+  .travel-hero .hero-heading { font-size: clamp(37px, 9vw, 46px); line-height:1.13; margin-top: 18px; }
+  .travel-hero .hero-intro p { font-size: 14px; line-height:1.6; margin-top:17px; }
+  .travel-hero .hero-intro > div:last-child { font-size: 9px; line-height:1.6; }
+  .travel-hero .liquid-card { min-height: 231px; }
+  .travel-hero #destinations { padding-top:32px; }
+  .travel-hero .destination-tile { min-height: 104px; }
+  .travel-hero .brand-tile-title { font-size: 17px; }
+  .travel-hero .destination-tile .tile-arrow { width:30px; height:30px; }
+  .travel-hero .glass-textarea { height: 104px; }
+}
+@media (max-width:365px) {
+  .travel-hero .glass-submit { min-width:135px; padding-inline:12px; gap:5px; font-size:10px; }
+  .travel-hero .hero-heading { font-size: 35px; }
+  .travel-hero .brand-tile-title { font-size:15px; }
+  .travel-hero .destination-tile { padding:0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,*::before,*::after { animation-duration: .01ms !important; transition-duration:.01ms !important; scroll-behavior:auto !important; }
+}
