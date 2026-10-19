@@ -141,7 +141,15 @@
       .side{top:42%}
       .brand-name strong{font-size:12px}
     }
-    @media(max-width:1020px){.nav{display:none}}
+    .home-menu{display:none;position:relative}
+    .home-menu summary{display:grid;place-items:center;width:43px;height:43px;cursor:pointer;list-style:none;border:1px solid #ffffff9b;border-radius:50%;background:#f5eedf;color:#20392e;font-size:20px;user-select:none}
+    .home-menu summary::-webkit-details-marker{display:none}
+    .home-menu[open] summary{background:#d9b98b}
+    .home-menu nav{position:absolute;right:0;top:calc(100% + 12px);display:flex;flex-direction:column;min-width:235px;max-height:75svh;overflow:auto;padding:12px 19px;background:rgba(17,35,27,.98);border:1px solid rgba(255,255,255,.25);box-shadow:0 20px 40px #0005;backdrop-filter:blur(12px);border-radius:12px}
+    .home-menu nav a{display:block;padding:12px 4px;color:#fff;font-size:12px;font-weight:600;letter-spacing:.06em;border-bottom:1px solid #ffffff20}
+    .home-menu nav a:last-child{border-bottom:0}
+    .home-menu nav a:hover{color:#e6caa2}
+    @media(max-width:1020px){.nav{display:none}.home-menu{display:block}}
     @media(max-width:760px){
       .nav{display:none}
       .header{top:18px;left:18px;right:18px}
@@ -175,7 +183,8 @@
       .prototype-note{font-size:7px;top:8px}
     }
     @media(max-width:640px){.side{display:none}}
-    @media(max-width:500px){
+    @media(max-width:500px){.header .menu{display:none}.brand-name{margin-right:0}.home-menu summary{width:39px;height:39px}
+
       .brand-name strong{font-size:9px}
       .brand-name small{font-size:7px}
       .side{top:96px}
@@ -245,6 +254,7 @@
           <a href="prestations.html">Prestations</a>
           <a href="faq.html">Questions</a>
         </nav>
+        <details class="home-menu"><summary aria-label="Ouvrir la navigation">☰</summary><nav aria-label="Navigation mobile"><a href="index.html">Accueil</a><a href="amerique.html">Amérique du Nord</a><a href="europe.html">Europe</a><a href="concept.html">Le concept</a><a href="methode.html">La méthode</a><a href="prestations.html">Prestations</a><a href="faq.html">Questions</a><a href="contact.html">Mon projet ↗</a></nav></details>
         <a class="menu" href="contact.html">MON VOYAGE <span style="margin-left:8px">↗</span></a>
       </div>
     </header>
