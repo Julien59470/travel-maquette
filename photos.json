@@ -41,8 +41,8 @@
   },
   "paris-haussmann": {
     "id": "photo-1760389005023-a1ba1684bba8",
-    "w": 1000,
-    "q": 80,
+    "w": 950,
+    "q": 73,
     "artist": "Sébastien Lavalaye",
     "source": "https://unsplash.com/photos/parisian-buildings-with-mansard-roofs-under-blue-sky-7bHR88yzrPU",
     "subject": "Paris Haussmann architecture, golden hour"
@@ -65,8 +65,8 @@
   },
   "canada-moraine": {
     "id": "photo-1761880619787-56285c7f5f1f",
-    "w": 1800,
-    "q": 81,
+    "w": 1600,
+    "q": 76,
     "artist": "Deep Doshi",
     "source": "https://unsplash.com/photos/turquoise-lake-reflects-majestic-mountains-under-a-cloudy-sky-E85SXZ5kg-k",
     "subject": "Moraine Lake, Banff, Canada"
@@ -89,8 +89,8 @@
   },
   "positano-coast": {
     "id": "photo-1790792530390-947a6deb5971",
-    "w": 1800,
-    "q": 82,
+    "w": 1500,
+    "q": 66,
     "artist": "Jakub Tomasik",
     "source": "https://unsplash.com/photos/cliffside-houses-and-beach-in-positano-kbfvVx2m3_Y",
     "subject": "Positano Amalfi coast, Italy"
@@ -113,8 +113,8 @@
   },
   "travel-workspace": {
     "id": "photo-1653491951587-282e99d6c1e5",
-    "w": 1350,
-    "q": 78,
+    "w": 1200,
+    "q": 72,
     "artist": "Anirudh",
     "source": "https://unsplash.com/photos/a-map-camera-notebook-and-other-items-on-a-table-7DuSUrYyXNs",
     "subject": "Planning table with map, notebook and camera"
@@ -153,8 +153,8 @@
   },
   "tuscany-vineyard": {
     "id": "photo-1782070308143-0e4cbc76b97a",
-    "w": 1450,
-    "q": 80,
+    "w": 1250,
+    "q": 73,
     "artist": "Rafael Peier",
     "source": "https://unsplash.com/photos/cypress-trees-line-a-winding-road-through-sunlit-vineyards-Z7NF1QeVaS4",
     "subject": "Tuscany country road and vineyards, Italy"
