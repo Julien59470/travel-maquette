@@ -25,7 +25,7 @@ def fetch(item: tuple[str, dict]) -> tuple[str, int]:
     if not re.fullmatch(r"[a-z0-9-]+", name):
         raise ValueError(f"Invalid image key: {name}")
     ident = spec["id"]
-    if not re.fullmatch(r"photo-\d{13}-[a-f0-9]{12}", ident):
+    if not re.fullmatch(r"photo-\d{10,13}-[a-f0-9]{12}", ident):
         raise ValueError(f"Invalid Unsplash ID: {ident}")
     size = int(spec["w"])
     quality = int(spec["q"])
