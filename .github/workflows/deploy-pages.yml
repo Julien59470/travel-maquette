@@ -21,6 +21,11 @@ jobs:
         uses: actions/checkout@v4
         with:
           persist-credentials: false
+      - name: Reuse optimized photo cache
+        uses: actions/cache@v4
+        with:
+          path: _site/assets/photos
+          key: euramerica-unsplash-webp-${{ hashFiles('photos.json') }}
       - name: Download and optimize 21 licensed travel photos
         run: python3 scripts/prepare_photos.py
       - name: Audit HTML, photo assets, links and accessibility basics
