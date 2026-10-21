@@ -261,7 +261,7 @@ body{background:#faf8f3;color:#1a445a}
 .brand{gap:11px}
 .brand-symbol{width:76px;height:48px;color:#af7e46;display:block}
 .brand-symbol img{width:100%;height:100%;object-fit:contain}
-.brand-copy strong{color:#16465d;font-family:'Fraunces',Georgia,serif;font-size:19px;letter-spacing:-.035em;font-weight:500;text-transform:none}
+.brand-copy strong{color:#16465d;font-family:'DM Sans',Arial,sans-serif;font-size:19px;letter-spacing:-.035em;font-weight:600;text-transform:none}
 .brand-copy strong span{color:#16465d!important}
 .brand-copy small{font-size:8px;letter-spacing:.1em;color:#b57f46;margin-top:5px;white-space:nowrap}
 .site-nav{gap:clamp(9px,1.2vw,22px)}
