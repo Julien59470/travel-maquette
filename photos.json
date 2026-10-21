@@ -1,0 +1,170 @@
+{
+  "monument-day": {
+    "id": "photo-1509316785289-025f5b846b35",
+    "w": 1800,
+    "q": 82,
+    "artist": "Ganapathy Kumar",
+    "source": "https://unsplash.com/photos/sandstone-buttes-in-monument-valley-L75D18aVal8",
+    "subject": "Monument Valley, Arizona/Utah, USA"
+  },
+  "monument-sunrise": {
+    "id": "photo-1718471480244-57cde007369c",
+    "w": 1900,
+    "q": 82,
+    "artist": "Joseph Corl",
+    "source": "https://unsplash.com/photos/the-sun-is-setting-over-a-desert-landscape-JdAdYrzjX2c",
+    "subject": "Monument Valley, sunrise, USA"
+  },
+  "miami-artdeco": {
+    "id": "photo-1752014613771-7afd0d131b9c",
+    "w": 1250,
+    "q": 80,
+    "artist": "Avi Werde",
+    "source": "https://unsplash.com/photos/art-deco-architecture-in-miami-beach-SddCuFwXYQc",
+    "subject": "Miami Beach, Florida, pastel Art Deco facade"
+  },
+  "copenhagen-nyhavn": {
+    "id": "photo-1763274939486-e741386d66b3",
+    "w": 1250,
+    "q": 80,
+    "artist": "Ahmet AZAKLI",
+    "source": "https://unsplash.com/photos/colorful-buildings-line-a-canal-with-boats-at-nyhavn-g5hGxmHoHKo",
+    "subject": "Nyhavn harbor, Copenhagen, Denmark"
+  },
+  "copenhagen-sunny": {
+    "id": "photo-1760992180090-0c2a8530ff0c",
+    "w": 1120,
+    "q": 80,
+    "artist": "Arya Winarto",
+    "source": "https://unsplash.com/photos/colorful-buildings-line-canal-with-boats-in-copenhagen-fkOdefe-744",
+    "subject": "Nyhavn colorful houses sunny day"
+  },
+  "paris-haussmann": {
+    "id": "photo-1760389005023-a1ba1684bba8",
+    "w": 1000,
+    "q": 80,
+    "artist": "Sébastien Lavalaye",
+    "source": "https://unsplash.com/photos/parisian-buildings-with-mansard-roofs-under-blue-sky-7bHR88yzrPU",
+    "subject": "Paris Haussmann architecture, golden hour"
+  },
+  "santorini-blue": {
+    "id": "photo-1560703650-db93f86c37b3",
+    "w": 1450,
+    "q": 81,
+    "artist": "Matthew Waring",
+    "source": "https://unsplash.com/photos/white-and-blue-dome-building-near-ocran-k3MvAX7T3Xk",
+    "subject": "Santorini blue dome, Greece"
+  },
+  "santorini-sunset": {
+    "id": "photo-1629470035936-3296c3bd8237",
+    "w": 1650,
+    "q": 82,
+    "artist": "Florian Wehde",
+    "source": "https://unsplash.com/photos/white-and-blue-dome-building-OJScR4tDRyc",
+    "subject": "Oia Santorini golden-hour panorama"
+  },
+  "canada-moraine": {
+    "id": "photo-1761880619787-56285c7f5f1f",
+    "w": 1800,
+    "q": 81,
+    "artist": "Deep Doshi",
+    "source": "https://unsplash.com/photos/turquoise-lake-reflects-majestic-mountains-under-a-cloudy-sky-E85SXZ5kg-k",
+    "subject": "Moraine Lake, Banff, Canada"
+  },
+  "yosemite-sunrise": {
+    "id": "photo-1757386117955-c491ad384a26",
+    "w": 1250,
+    "q": 80,
+    "artist": "Venti Views",
+    "source": "https://unsplash.com/photos/sunrise-over-half-dome-in-yosemite-national-park-fPRl-GHk4Mo",
+    "subject": "Yosemite Half Dome sunrise, California"
+  },
+  "big-sur-road": {
+    "id": "photo-1776142519470-56c9f8107685",
+    "w": 1700,
+    "q": 81,
+    "artist": "Fabio Sasso",
+    "source": "https://unsplash.com/photos/coastal-highway-winds-along-rugged-sun-drenched-cliffs-overlooking-ocean--r4TKq-gEI4",
+    "subject": "Pacific Coast Highway Big Sur, California"
+  },
+  "positano-coast": {
+    "id": "photo-1790792530390-947a6deb5971",
+    "w": 1800,
+    "q": 82,
+    "artist": "Jakub Tomasik",
+    "source": "https://unsplash.com/photos/cliffside-houses-and-beach-in-positano-kbfvVx2m3_Y",
+    "subject": "Positano Amalfi coast, Italy"
+  },
+  "venice-grandcanal": {
+    "id": "photo-1511892964110-b714f7dabcde",
+    "w": 1650,
+    "q": 80,
+    "artist": "Cristina Gottardi",
+    "source": "https://unsplash.com/photos/aerial-view-photography-of-grand-canal-venice-under-golden-hour-s9u-sBJiRnE",
+    "subject": "Venice Grand Canal, Italy golden hour"
+  },
+  "venice-canals": {
+    "id": "photo-1511135492865-a7afb0ab5937",
+    "w": 1300,
+    "q": 80,
+    "artist": "Luca Bravo",
+    "source": "https://unsplash.com/photos/grand-canal-venice-Wt2ZI8FDPyI",
+    "subject": "Venice Canal, Italy"
+  },
+  "travel-workspace": {
+    "id": "photo-1653491951587-282e99d6c1e5",
+    "w": 1350,
+    "q": 78,
+    "artist": "Anirudh",
+    "source": "https://unsplash.com/photos/a-map-camera-notebook-and-other-items-on-a-table-7DuSUrYyXNs",
+    "subject": "Planning table with map, notebook and camera"
+  },
+  "travel-camera-map": {
+    "id": "photo-1503220954697-e02095e8e0d5",
+    "w": 1350,
+    "q": 80,
+    "artist": "Unsplash contributor",
+    "source": "https://unsplash.com/photos/black-and-gray-camera-on-open-map-yRf7ABVDddM",
+    "subject": "Vintage camera resting on world map"
+  },
+  "travel-journal": {
+    "id": "photo-1501868984184-76121ed6a6e2",
+    "w": 1300,
+    "q": 80,
+    "artist": "Kira auf der Heide",
+    "source": "https://unsplash.com/photos/wallet-on-top-of-map-8s1wfA6aB-4",
+    "subject": "Leather journal and antique map"
+  },
+  "travel-flatlay": {
+    "id": "photo-1452421822248-d4c2b47f0c81",
+    "w": 1600,
+    "q": 80,
+    "artist": "Dariusz Sankowski",
+    "source": "https://unsplash.com/photos/flat-ray-photography-of-book-pencil-camera-and-with-lens-3OiYMgDKJ6k",
+    "subject": "Travel journal, maps, sketch and camera"
+  },
+  "provence-lavender": {
+    "id": "photo-1436984865625-d278e0c37da6",
+    "w": 1800,
+    "q": 81,
+    "artist": "Noah Baslé",
+    "source": "https://unsplash.com/photos/purple-lavender-field-overlooking-mountains-during-daytime-Txjvtscb6Fo",
+    "subject": "Lavender fields Provence, France"
+  },
+  "tuscany-vineyard": {
+    "id": "photo-1782070308143-0e4cbc76b97a",
+    "w": 1450,
+    "q": 80,
+    "artist": "Rafael Peier",
+    "source": "https://unsplash.com/photos/cypress-trees-line-a-winding-road-through-sunlit-vineyards-Z7NF1QeVaS4",
+    "subject": "Tuscany country road and vineyards, Italy"
+  },
+  "newyork-skyline": {
+    "id": "photo-1786361295429-c329782855d5",
+    "w": 1300,
+    "q": 80,
+    "artist": "Peter Beke",
+    "source": "https://unsplash.com/photos/brooklyn-bridge-and-manhattan-skyline-e1uXetzjgZI",
+    "subject": "Brooklyn Bridge New York skyline, USA"
+  }
+}
