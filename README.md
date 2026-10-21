@@ -1,45 +1,48 @@
-# Carnets & Horizons — maquette multipage
+# EurAmerica Travel — maquette multi-pages
 
-Maquette de fusion des sites [AmericaTravel](https://americatravel.fr/) et [EuropaTravel](https://europatravel.fr/). Concept de marque provisoire présentant l'activité de **Travel Planner indépendant**.
+Maquette de proposition pour la réunion de **AmericaTravel** (Amérique du Nord) et **EuropaTravel** (Europe), au sein d'une nouvelle marque commune **EurAmerica Travel**.
 
-## Accéder au site
+## Démonstration
 
 https://julien59470.github.io/travel-maquette/
 
-## Pages réelles (aucune modale)
+Le design applique les indications reçues : **site nettement plus clair**, fond ivoire, logo bleu profond et ocre, visuels lumineux, rouge/bleu/blanc et terres chaudes en Amérique, maisons colorées du Nord de l'Europe, tons pierre et ardoise au centre, blanc et terracotta en Méditerranée.
 
-| Page | Fonction |
+Le symbole vectoriel `assets/euramerica-route.svg` constitue une interprétation provisoire de la trajectoire dessinée dans la référence graphique du client ; il ne s'agit pas d'un logo final validé.
+
+## Organisation
+
+Huit pages HTML autonomes, reliées par de vraies URL (aucune modale) :
+
+| Fichier | Rôle |
 | --- | --- |
-| [Accueil](index.html) | Expérience plein écran, portail Canvas entre Amérique et Europe |
-| [Amérique](amerique.html) | Univers AmericaTravel et parcours commercial |
-| [Europe](europe.html) | Univers EuropaTravel et parcours commercial |
-| [Le concept](concept.html) | Métier, conseil et absence de vente de prestations touristiques |
-| [La méthode](methode.html) | De la prise de contact au carnet et aux réservations |
-| [Prestations](prestations.html) | Tarifs indicatifs des sites d'origine et sélecteur accessible |
-| [Questions](faq.html) | Réponses accessibles sur une vraie page HTML |
-| [Contact](contact.html) | Formulaire préparant un e-mail depuis la messagerie du visiteur |
+| `index.html` | Accueil lumineux, doubles univers visuels, inspirations régionales et demande de voyage |
+| `amerique.html` | AmericaTravel, road trips, grandes étendues et ambiance pastel Miami |
+| `europe.html` | EuropaTravel, Nord coloré, Centre pierre/ardoise et Sud méditerranéen |
+| `concept.html` | Métier de Travel Planner et transparence sur les prestations |
+| `methode.html` | Échange, préparation et carnet d'itinéraire |
+| `prestations.html` | Prestations indicatives et sélecteur par destination |
+| `faq.html` | Questions/réponses accessibles sans fenêtres superposées |
+| `contact.html` | Préparation d'une demande par e-mail avec saisie locale |
 
-La navigation, y compris celle de l'accueil sur mobile, utilise des liens réels vers des fichiers HTML. Les anciens panneaux modaux ont été supprimés.
+Ressources partagées : `pages.css`, `pages.js`, `home.css`, `home.js`, `assets/euramerica-route.svg`.
 
-## Architecture
+La page d'accueil ne comporte plus de préchargement vidéo imposé. Les animations sont légères et respectent `prefers-reduced-motion`.
 
-- Fichier autonome `index.html` : interface cinématique, préchargement, animation Canvas et menu mobile natif.
-- `amerique.html`, `europe.html`, `concept.html`, `methode.html`, `prestations.html`, `faq.html`, `contact.html` : pages éditoriales statiques.
-- `pages.css` : identité graphique partagée, responsive, navigation, sections et formulaires.
-- `pages.js` : menu mobile, animations à réduction de mouvement, sélecteur de prestations et préparation de l'e-mail.
-- `.github/workflows/deploy-pages.yml` : vérification automatique des fichiers, des URL internes, des ancres et des scripts JS, puis publication GitHub Pages via Actions.
+## GitHub Pages
 
-Aucun framework ni outil de compilation. Le workflow copie les huit fichiers HTML et leurs deux ressources communes dans l'artefact Pages. Publication à chaque push sur `main`.
+Déploiement automatique via **GitHub Actions**, sur chaque commit `main`, avec validation préalable des huit pages, des liens internes, des images et de la syntaxe JavaScript. Aucun build ni dépendance npm.
 
-## Important : limitations de la démonstration
+Configuration du dépôt : **Settings → Pages → Build and deployment → GitHub Actions**.
 
-- Nom **Carnets & Horizons** provisoire, ni validé par le client ni vérifié en disponibilité.
-- Toutes les pages contiennent `noindex,nofollow` : ne pas publier comme site de production sans cadrage SEO préalable.
-- Les photos et la vidéo de l'introduction sont hébergées sur des sites externes ; autorisations d'utilisation et performances à revoir.
-- Le formulaire est une démonstration : il ne transmet ni ne stocke directement de données. Il ouvre seulement un brouillon dans la messagerie du visiteur, qui reste libre d'envoyer ou non.
-- Les tarifs ont été repris à titre indicatif sur les sites existants en octobre 2026 ; conditions, prestations et textes commerciaux à confirmer.
-- Pages légales définitives, hébergement réel, domaines et redirections 301 : à traiter séparément une fois le devis validé.
+## Périmètre et précautions
 
-## Déploiement
+- La marque **EurAmerica Travel** est une proposition du client. Sa disponibilité juridique n'est pas établie.
+- Le domaine illustré dans l'image du client est `euramericatravel.fr` (un seul « l » final), tandis que son message mentionnait `euramericatravell.fr` (deux « l »). **L'orthographe et la disponibilité sont à valider avant achat.** Le dépôt GitHub Pages ne configure pas de domaine personnalisé.
+- Toutes les pages contiennent `noindex,nofollow` pour éviter une indexation accidentelle de la maquette. Ne pas supprimer sans validation du projet et du plan SEO.
+- Les photos proviennent d'URL externes Unsplash et servent uniquement à illustrer une direction artistique. Vérifier les droits des médias et héberger les éléments approuvés pour une version commerciale.
+- Le formulaire ne stocke ni n'envoie de données : il ouvre un brouillon dans la messagerie de l'utilisateur et laisse celui-ci décider de l'envoi.
+- Aucune modification de `americatravel.fr` ou `europatravel.fr`, aucune redirection 301 et aucun changement de DNS à ce stade.
+- Avant une mise en ligne définitive : audit des deux anciens sites, plan de migration URL par URL, choix et achat du domaine, contenus et prix validés, mentions légales, formulaires connectés, Search Console et tests de performances.
 
-Dans **Settings → Pages**, sélectionner **GitHub Actions**. Voir ensuite l'onglet **Actions** et le workflow « Deploy Travel Maquette to GitHub Pages ».
+Ce dépôt est une **maquette de présentation**, pas une migration SEO réalisée ni le site contractuel définitif.
