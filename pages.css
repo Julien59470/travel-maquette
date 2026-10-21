@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&display=swap');
 :root{--dark:#101c17;--forest:#18382c;--gold:#d8b98d;--paper:#f2ede4;--text:#1a2c23;--muted:#657168;--line:#d8d3c8;font-family:'DM Sans',Arial,sans-serif;background:var(--paper);color:var(--text);font-synthesis:none}
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:86px}
@@ -252,7 +252,6 @@ html{scroll-behavior:auto}
   EurAmerica Travel — client-led art direction, light editorial v2
   Inspired by the provided ivory / blue / ochre visual.
 ---------------------------------------------------------------- */
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&display=swap');
 :root{--dark:#16465b;--forest:#194c60;--gold:#b5844f;--paper:#faf8f3;--text:#1b475c;--muted:#617179;--line:#e2d8ca}
 body{background:#faf8f3;color:#1a445a}
 .page-header,.page-header.is-sticky{background:rgba(250,248,243,.97);color:#17465d;border-bottom:1px solid #e7dccc;backdrop-filter:blur(14px);box-shadow:none}
@@ -402,3 +401,24 @@ body{background:#faf8f3;color:#1a445a}
  .contact-layout .section-title{font-size:clamp(48px,11vw,75px)}
  .footer-grid{grid-template-columns:1fr 1fr}
 }
+
+/* Bright regional chapters: red earth / Miami pastel / three Europes */
+.regional-split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(45px,8vw,110px);align-items:center}
+.regional-split-visual{height:555px;position:relative;overflow:hidden;background:linear-gradient(135deg,#f4cabf,#94c8c5)}
+.regional-split-visual img{width:100%;height:100%;object-fit:cover}
+.regional-split-visual::before{content:'';position:absolute;inset:0;border:17px solid #fff9f3;pointer-events:none}
+.regional-split-copy p:not(.eyebrow){font-size:15px;line-height:1.95;color:#63737b}
+.regional-split-copy .section-title{font-size:clamp(42px,5vw,74px)}
+.regional-split-copy .button{margin-top:24px}
+.europe-moods{background:#fffaf3}
+.europe-mood-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:21px}
+.europe-mood{position:relative;background:#fbf6ed;min-width:0;padding-bottom:30px;border-bottom:2px solid #c8a979}
+.europe-mood>img{width:100%;height:350px;object-fit:cover;transition:transform .55s}
+.europe-mood:hover>img{transform:translateY(-4px)}
+.europe-mood>div{padding:24px 5px}
+.europe-mood span{color:#9c744b;font-size:10px;letter-spacing:.13em;font-weight:700}
+.europe-mood h3{font-family:'Fraunces',Georgia,serif;color:#17485d;letter-spacing:-.04em;font-weight:400;font-size:clamp(26px,2.4vw,35px);margin:13px 0 10px}
+.europe-mood p{font-size:13px;line-height:1.8;color:#6a7b7b;margin:0}
+.mood-north{border-color:#87bbc7}.mood-central{border-color:#d2b57e}.mood-south{border-color:#d78061}
+@media(max-width:900px){.regional-split{gap:35px}.regional-split-visual{height:450px}.europe-mood-grid{gap:13px}.europe-mood>img{height:270px}.europe-mood>div{padding:18px 3px}}
+@media(max-width:650px){.regional-split{grid-template-columns:1fr;gap:32px}.regional-split-visual{height:390px}.europe-mood-grid{grid-template-columns:1fr;gap:24px}.europe-mood>img{height:350px}.europe-mood h3{font-size:31px}}
