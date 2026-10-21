@@ -83,7 +83,7 @@
       const budget = String(data.get('budget') || 'Non précisé').trim();
       const people = String(data.get('voyageurs') || 'Non précisé').trim();
       const project = String(data.get('projet')).trim();
-      const subject = encodeURIComponent('Demande de voyage sur mesure — ' + (dest === 'amerique' ? 'AmericaTravel' : dest === 'europe' ? 'EuropaTravel' : 'Carnets & Horizons'));
+      const subject = encodeURIComponent('Demande de voyage sur mesure — ' + (dest === 'amerique' ? 'AmericaTravel' : dest === 'europe' ? 'EuropaTravel' : 'EurAmerica Travel'));
       const body = encodeURIComponent([
         'Bonjour Maurice,', '',
         'Je vous contacte depuis la maquette de votre futur site.', '',
