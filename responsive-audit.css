@@ -73,6 +73,7 @@ img,svg,video{max-width:100%}
  .intro-grid,.intro-grid.reverse,.regional-split,.contact-layout{grid-template-columns:minmax(0,1fr)}
  .intro-grid>* ,.contact-layout>*,.regional-split>*{min-width:0}
  .intro-art{max-width:100%}
+ .intro-art .art-frame{inset:12px 0 0 10px;max-width:calc(100% - 10px);pointer-events:none}
  .feature-grid,.europe-mood-grid,.timeline,.home-destination-grid,.regions-cards,.home-steps-grid{grid-template-columns:minmax(0,1fr)}
  .feature-grid .feature{max-width:100%}
  .feature-link,.region-arrow{min-height:44px;min-width:44px}
