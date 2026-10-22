@@ -12,11 +12,20 @@ const root = path.resolve(__dirname, '..', '_site');
 const allowed = {'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'text/javascript; charset=utf-8','.svg':'image/svg+xml','.webp':'image/webp'};
 const pages = ['index.html','amerique.html','europe.html','concept.html','methode.html','prestations.html','faq.html','contact.html'];
 const devices = [
-  {name:'small-phone',width:320,height:700,isMobile:true,deviceScaleFactor:1},
+  {name:'tiny-phone',width:320,height:700,isMobile:true,deviceScaleFactor:1},
+  {name:'compact-phone',width:360,height:760,isMobile:true,deviceScaleFactor:1},
   {name:'mobile',width:375,height:812,isMobile:true,deviceScaleFactor:1},
   {name:'large-phone',width:430,height:932,isMobile:true,deviceScaleFactor:1},
+  {name:'small-tablet-portrait',width:600,height:960,isMobile:true,deviceScaleFactor:1},
+  {name:'mobile-breakpoint',width:650,height:920,isMobile:true,deviceScaleFactor:1},
+  {name:'tablet-breakpoint',width:651,height:920,isMobile:true,deviceScaleFactor:1},
   {name:'tablet',width:768,height:1024,isMobile:true,deviceScaleFactor:1},
+  {name:'tablet-wide',width:820,height:1180,isMobile:true,deviceScaleFactor:1},
+  {name:'tablet-landscape',width:900,height:700,deviceScaleFactor:1},
+  {name:'hero-breakpoint',width:980,height:770,deviceScaleFactor:1},
   {name:'laptop',width:1024,height:768,deviceScaleFactor:1},
+  {name:'nav-breakpoint',width:1080,height:780,deviceScaleFactor:1},
+  {name:'small-desktop',width:1180,height:780,deviceScaleFactor:1},
   {name:'desktop',width:1440,height:900,deviceScaleFactor:1},
   {name:'wide-desktop',width:1920,height:1080,deviceScaleFactor:1}
 ];
@@ -192,9 +201,80 @@ const server = http.createServer((req,res) => {
                !photoState.fallbackBackground.includes('monument-day.webp')){
               throw Error('America hero image must be large and visible: '+JSON.stringify(photoState));
             }
-            if(photoState.containerBounds.top>=device.height){
-              throw Error('America hero photo is not visible above the fold: '+JSON.stringify(photoState));
+            if(device.width<=980 && photoState.containerBounds.top<hero.copy.bottom+6){
+              throw Error('America mobile photo must follow intro text and button: '+JSON.stringify(photoState)+' '+label);
             }
+            if(device.width>980 && Math.abs(hero.copy.top-hero.visual.top)>240){
+              throw Error('America desktop photograph is not aligned with the hero: '+JSON.stringify(photoState));
+            }
+          }
+        }
+
+        // Mobile/tablet interaction and hit-area audit.
+        if(device.width<=1080){
+          const menu=page.locator('#mobile-menu-toggle');
+          const metrics=await menu.evaluate(el=>{
+            const rect=el.getBoundingClientRect();
+            const style=getComputedStyle(el);
+            return {width:rect.width,height:rect.height,display:style.display,aria:el.getAttribute('aria-expanded')};
+          });
+          if(metrics.display==='none' || metrics.width<44 || metrics.height<44)
+            throw Error('Mobile/tablet menu not accessible '+name+' '+device.name+' '+JSON.stringify(metrics));
+          await menu.click();
+          const menuState=await page.evaluate(()=>{
+            const nav=document.querySelector('#mobile-links');
+            const header=document.querySelector('.page-header');
+            const navBox=nav.getBoundingClientRect();
+            const links=[...nav.querySelectorAll('a')];
+            return {
+              expanded:document.querySelector('#mobile-menu-toggle').getAttribute('aria-expanded'),
+              visible:getComputedStyle(nav).display!=='none',
+              links:links.map(el=>{const r=el.getBoundingClientRect();return {text:el.textContent.trim(),height:r.height,right:r.right}}),
+              bottom:navBox.bottom,
+              headerZ:getComputedStyle(header).zIndex
+            };
+          });
+          if(menuState.expanded!=='true'||!menuState.visible||menuState.links.length<7)
+            throw Error('Mobile menu cannot be opened '+name+' '+device.name+' '+JSON.stringify(menuState));
+          if(menuState.links.some(link=>link.height<44||link.right>device.width+3))
+            throw Error('Mobile menu small/overflowing link '+name+' '+device.name+' '+JSON.stringify(menuState));
+          await page.keyboard.press('Escape');
+          const expanded=await menu.getAttribute('aria-expanded');
+          if(expanded!=='false')throw Error('Escape does not close menu: '+name+' '+device.name);
+        }
+
+        if(name==='contact.html'){
+          const fields=await page.evaluate(()=>{
+            const form=document.querySelector('#trip-form');
+            return [...form.querySelectorAll('input,select,textarea,button')].map(el=>{
+              const r=el.getBoundingClientRect();
+              const cs=getComputedStyle(el);
+              return {name:el.name||el.textContent.slice(0,22),width:r.width,height:r.height,left:r.left,right:r.right,fontSize:parseFloat(cs.fontSize)};
+            });
+          });
+          for(const field of fields){
+            if(field.left<0||field.right>device.width+3||field.width<150)
+              throw Error('Contact field clipped '+name+' '+device.name+JSON.stringify(field));
+            if(device.width<=650&&field.fontSize<16&&field.name!=='')
+              throw Error('Contact input could trigger mobile zoom '+name+' '+device.name+JSON.stringify(field));
+          }
+        }
+        if(name==='prestations.html' && device.width<=980){
+          const tabs=page.locator('[data-offer-tab]');
+          if(await tabs.count()===2){
+            await tabs.nth(1).click();
+            if(await tabs.nth(1).getAttribute('aria-selected')!=='true')
+              throw Error('Europe tariff tab not selectable '+device.name);
+            const visible=await page.locator('[data-offer-panel="europe"]').isVisible();
+            if(!visible)throw Error('Europe tariff content hidden '+device.name);
+          }
+        }
+        if(name==='faq.html' && device.width<=650){
+          const questions=page.locator('.qa-item');
+          if(await questions.count()>1){
+            await questions.nth(1).locator('summary').click();
+            if(!await questions.nth(1).evaluate(el=>el.open))
+              throw Error('FAQ accordion not usable on mobile '+device.name);
           }
         }
 
