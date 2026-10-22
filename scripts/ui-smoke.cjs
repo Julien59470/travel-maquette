@@ -119,6 +119,53 @@ const server = http.createServer((req,res) => {
             if(Math.abs(r.height-x.height)>tolerance)throw Error('Card/image height mismatch: '+label);
           }
         }
+        if(name!=='index.html'){
+          const hero=await page.evaluate(()=>{
+            const rect=selector=>{
+              const element=document.querySelector(selector);
+              if(!element)return null;
+              const r=element.getBoundingClientRect();
+              return {top:r.top,bottom:r.bottom,left:r.left,right:r.right,width:r.width,height:r.height};
+            };
+            const title=document.querySelector('.page-hero .page-title');
+            const photo=document.querySelector('.hero-visual-image');
+            const link=document.querySelector('.page-hero .hero-intro-link');
+            const barLink=document.querySelector('.page-hero .hero-coordinate > a');
+            return {
+              shell:rect('.hero-shell'),copy:rect('.hero-copy'),title:rect('.page-title'),
+              lead:rect('.hero-lede'),cta:rect('.hero-intro-link'),
+              visual:rect('.hero-visual'),bar:rect('.hero-coordinate'),
+              barLink:rect('.hero-coordinate > a'),header:rect('.page-header'),
+              fontSize:title?parseFloat(getComputedStyle(title).fontSize):0,
+              photoReady:photo?.complete&&photo.naturalWidth>0,
+              ctaContrast:link?getComputedStyle(link).color:null,
+              ctaBackground:link?getComputedStyle(link).backgroundColor:null,
+              barColor:barLink?getComputedStyle(barLink).color:null
+            };
+          });
+          const label=name+' '+device.name+' '+JSON.stringify(hero);
+          for(const key of ['shell','copy','title','lead','cta','visual','bar','barLink','header']){
+            if(!hero[key]||hero[key].height<4)throw Error('Hero element missing: '+key+' '+label);
+          }
+          if(hero.copy.top<hero.header.bottom-4)throw Error('Hero text hidden behind sticky header: '+label);
+          if(hero.title.left<hero.copy.left-3||hero.title.right>hero.copy.right+3)
+            throw Error('Heading leaves text column: '+label);
+          if(hero.lead.right>hero.copy.right+3 || hero.cta.right>hero.copy.right+3)
+            throw Error('Paragraph or CTA leaves text column: '+label);
+          if(device.width>980){
+            if(hero.copy.right>hero.visual.left-6)throw Error('Hero text/image overlap: '+label);
+          }else if(hero.copy.bottom>hero.visual.top-6){
+            throw Error('Stacked hero image collides with text: '+label);
+          }
+          if(hero.bar.top<Math.max(hero.copy.bottom,hero.visual.bottom)+8)
+            throw Error('Bottom hero bar overlaps hero content: '+label);
+          if(hero.barLink.right>hero.bar.right+3 || hero.barLink.top<hero.bar.top-3 ||
+             hero.barLink.bottom>hero.bar.bottom+3)throw Error('Bottom hero link outside its bar: '+label);
+          if(hero.ctaContrast==='rgb(23, 72, 93)' || hero.ctaContrast===hero.ctaBackground)
+            throw Error('Hero CTA unreadable: '+label);
+          if(hero.fontSize<30)throw Error('Heading unexpectedly small: '+label);
+        }
+
         if(name==='index.html'){
           const anchor=page.locator('.home-hero-actions a[href="#destinations"]');
           if(await anchor.count()){
