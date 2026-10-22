@@ -39,7 +39,7 @@ jobs:
           from collections import Counter
           import json
           pages=['index.html','amerique.html','europe.html','concept.html','methode.html','prestations.html','faq.html','contact.html']
-          assets=['pages.css','pages.js','home.css','home.js','assets/euramerica-route.svg']
+          assets=['pages.css','pages.js','home.css','home.js','modern.css','modern-home.css','modern.js','assets/euramerica-route.svg']
           photos=json.loads(Path('photos.json').read_text(encoding='utf-8'))
           class Reader(HTMLParser):
               def __init__(self):
@@ -69,10 +69,13 @@ jobs:
                   assert 'alt' in image,f'Missing alt: {page}'
               assert 'assets/euramerica-route.svg' in content,f'Brand logo missing: {page}'
               if page=='index.html':
-                  assert 'href="home.css"' in content and 'src="home.js"' in content,'Home assets'
+                  assert 'href="home.css"' in content and 'src="home.js"' in content and 'href="modern-home.css"' in content,'Home assets'
                   assert 'preloader-video' not in content,'Old preloader'
               else:
                   assert 'href="pages.css"' in content and 'src="pages.js"' in content,f'Shared assets: {page}'
+              assert 'href="modern.css"' in content and 'src="modern.js"' in content,f'Modern assets missing: {page}'
+              assert 'Plus+Jakarta+Sans' in content and 'Space+Grotesk' in content,f'Fonts missing: {page}'
+              assert 'Fraunces:' not in content and 'DM+Sans:' not in content,f'Old fonts: {page}'
               checked[page]=parser
               for source in content.split('assets/photos/')[1:]:
                   name=source.split('.webp')[0]
@@ -98,9 +101,10 @@ jobs:
           PY
           node --check pages.js
           node --check home.js
+          node --check modern.js
           mkdir -p _site/assets
           cp index.html amerique.html europe.html concept.html methode.html prestations.html faq.html contact.html _site/
-          cp pages.css pages.js home.css home.js _site/
+          cp pages.css pages.js home.css home.js modern.css modern-home.css modern.js _site/
           cp assets/euramerica-route.svg _site/assets/
           touch _site/.nojekyll
           test -s _site/index.html
