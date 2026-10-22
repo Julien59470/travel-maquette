@@ -49,7 +49,7 @@ const server = http.createServer((req,res) => {
   let checked=0;
   try {
     for(const device of devices){
-      const context=await browser.newContext({...device,reducedMotion:'reduce'});
+      const context=await browser.newContext({viewport:{width:device.width,height:device.height},isMobile:!!device.isMobile,deviceScaleFactor:device.deviceScaleFactor || 1,reducedMotion:'reduce'});
       for(const name of pages){
         const page=await context.newPage();
         const errors=[];
