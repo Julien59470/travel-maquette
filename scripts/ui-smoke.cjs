@@ -73,7 +73,14 @@ const server = http.createServer((req,res) => {
           };
         });
         if(!state.h1 || !state.h1rect || state.h1rect.width<10)throw Error(name+': missing visible heading');
-        if(state.scrollWidth>state.clientWidth+3)throw Error(name+' '+device.name+': horizontal overflow '+state.scrollWidth+'>'+state.clientWidth);
+        if(state.scrollWidth>state.clientWidth+3){
+          const offenders = await page.evaluate(() => [...document.querySelectorAll('body *')]
+            .map(e=>({tag:e.tagName,cls:String(e.className || '').slice(0,90),text:(e.textContent||'').trim().slice(0,50),r:e.getBoundingClientRect().right,l:e.getBoundingClientRect().left}))
+            .filter(x=>x.r>document.documentElement.clientWidth+3 || x.l < -3)
+            .sort((a,b)=>b.r-a.r).slice(0,16));
+          console.error('Overflow offenders',JSON.stringify(offenders,null,2));
+          throw Error(name+' '+device.name+': horizontal overflow '+state.scrollWidth+'>'+state.clientWidth);
+        }
         if(!state.ctaCount)throw Error(name+' '+device.name+': missing contact CTA');
         if(!state.modernFont || !state.css)throw Error(name+': missing font/theme');
         if(errors.length)throw Error(name+' '+device.name+': JS errors '+errors.join('; '));
