@@ -156,7 +156,7 @@ const server = http.createServer((req,res) => {
             throw Error('Paragraph or CTA leaves text column: '+label);
           if(device.width>980){
             if(hero.copy.right>hero.visual.left-6)throw Error('Hero text/image overlap: '+label);
-          }else if(hero.copy.bottom>hero.visual.top-6){
+          }else if(!(hero.copy.bottom<=hero.visual.top-6 || hero.visual.bottom<=hero.copy.top-6)){
             throw Error('Stacked hero image collides with text: '+label);
           }
           if(hero.bar.top<Math.max(hero.copy.bottom,hero.visual.bottom)+8)
