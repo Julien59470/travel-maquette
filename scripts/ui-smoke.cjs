@@ -249,13 +249,13 @@ const server = http.createServer((req,res) => {
             return [...form.querySelectorAll('input,select,textarea,button')].map(el=>{
               const r=el.getBoundingClientRect();
               const cs=getComputedStyle(el);
-              return {name:el.name||el.textContent.slice(0,22),width:r.width,height:r.height,left:r.left,right:r.right,fontSize:parseFloat(cs.fontSize)};
+              return {tag:el.tagName,name:el.name||el.textContent.slice(0,22),width:r.width,height:r.height,left:r.left,right:r.right,fontSize:parseFloat(cs.fontSize)};
             });
           });
           for(const field of fields){
             if(field.left<0||field.right>device.width+3||field.width<150)
               throw Error('Contact field clipped '+name+' '+device.name+JSON.stringify(field));
-            if(device.width<=650&&field.fontSize<16&&field.name!=='')
+            if(device.width<=650&&field.tag!=='BUTTON'&&field.fontSize<16)
               throw Error('Contact input could trigger mobile zoom '+name+' '+device.name+JSON.stringify(field));
           }
         }
