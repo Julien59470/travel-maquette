@@ -120,6 +120,8 @@ const server = http.createServer((req,res) => {
           }
         }
         if(name!=='index.html'){
+          const photo=page.locator('.page-hero .hero-visual-image');
+          await photo.evaluate(async image => { await image.decode(); });
           const hero=await page.evaluate(()=>{
             const rect=selector=>{
               const element=document.querySelector(selector);
@@ -164,6 +166,36 @@ const server = http.createServer((req,res) => {
           if(hero.ctaContrast==='rgb(23, 72, 93)' || hero.ctaContrast===hero.ctaBackground)
             throw Error('Hero CTA unreadable: '+label);
           if(hero.fontSize<30)throw Error('Heading unexpectedly small: '+label);
+          if(!hero.photoReady)throw Error('Hero photograph missing or failed to load: '+label);
+          if(name==='amerique.html'){
+            const photoState=await page.evaluate(()=>{
+              const image=document.querySelector('.page-hero .hero-visual-image');
+              const visual=document.querySelector('.page-hero .hero-visual');
+              const style=getComputedStyle(image);
+              const visualStyle=getComputedStyle(visual);
+              const box=image.getBoundingClientRect();
+              const container=visual.getBoundingClientRect();
+              return {
+                naturalWidth:image.naturalWidth,
+                naturalHeight:image.naturalHeight,
+                imageDisplay:style.display,
+                imageOpacity:parseFloat(style.opacity),
+                imageVisibility:style.visibility,
+                imageBounds:{width:box.width,height:box.height,top:box.top,bottom:box.bottom},
+                containerBounds:{width:container.width,height:container.height,top:container.top,bottom:container.bottom},
+                fallbackBackground:visualStyle.backgroundImage
+              };
+            });
+            if(photoState.naturalWidth<800 || photoState.imageDisplay==='none' ||
+               photoState.imageOpacity<.9 || photoState.imageVisibility==='hidden' ||
+               photoState.imageBounds.width<100 || photoState.imageBounds.height<150 ||
+               !photoState.fallbackBackground.includes('monument-day.webp')){
+              throw Error('America hero image must be large and visible: '+JSON.stringify(photoState));
+            }
+            if(photoState.containerBounds.top>=device.height){
+              throw Error('America hero photo is not visible above the fold: '+JSON.stringify(photoState));
+            }
+          }
         }
 
         if(name==='index.html'){
