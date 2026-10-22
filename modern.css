@@ -292,3 +292,271 @@ body{scroll-margin-top:110px}
  .europe-mood-grid .europe-mood>div{min-height:165px}
  .timeline .timeline-item{min-height:215px}
 }
+
+
+
+/* 2026-10: Shared seven-page hero rebuilt as actual side-by-side content.
+   Previously, an enormous title had no column constraint and covered a
+   decorative ::before background; the action and bottom bar floated over it. */
+.page-hero{
+  position:relative;
+  display:block;
+  height:auto;
+  min-height:0;
+  max-height:none;
+  padding:clamp(122px,9.8vw,153px) 0 0;
+  overflow:clip;
+  isolation:isolate;
+  background:linear-gradient(120deg,#faf8f3 0%,#faf8f3 62%,#f1f4ef 100%);
+  color:#19475d
+}
+.page-hero::before,.page-hero::after,.page-hero .grain{display:none!important}
+.page-hero .hero-shell{
+  position:relative;
+  display:grid;
+  grid-template-columns:minmax(0,.99fr) minmax(0,1.01fr);
+  align-items:center;
+  gap:clamp(30px,4.5vw,80px);
+  width:min(1380px,calc(100% - 112px));
+  min-height:0;
+  padding:0 0 clamp(36px,5vw,72px);
+  margin:0 auto
+}
+.page-hero .hero-copy{
+  position:relative;
+  min-width:0;
+  width:100%;
+  padding:20px 0 22px
+}
+.page-hero .hero-eyebrow{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:11px;
+  font-size:10px;
+  letter-spacing:.10em;
+  font-weight:800;
+  line-height:1.6;
+  margin:0 0 21px;
+  color:#b4743f
+}
+.page-hero .hero-eyebrow::before{width:28px;flex:none}
+.page-hero .page-title,.page-hero .page-title.long{
+  display:block;
+  width:100%;
+  max-width:100%;
+  min-width:0;
+  font-family:"Space Grotesk","Plus Jakarta Sans",sans-serif;
+  font-size:clamp(45px,4.25vw,70px);
+  font-weight:700;
+  line-height:1.075;
+  letter-spacing:-.066em;
+  text-wrap:pretty;
+  overflow-wrap:normal;
+  hyphens:none;
+  margin:0 0 23px;
+  color:#17475c;
+  text-shadow:none
+}
+.page-hero .hero-lede{
+  display:block;
+  max-width:550px;
+  margin:0;
+  color:#526a75;
+  font-size:clamp(14px,1.23vw,18px);
+  line-height:1.82;
+  font-weight:500
+}
+.page-hero .hero-intro-link{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:24px;
+  min-height:53px;
+  max-width:100%;
+  padding:14px 22px;
+  margin-top:29px;
+  border:1px solid #17475c;
+  border-radius:12px;
+  background:#17475c;
+  color:#fff;
+  box-shadow:0 13px 26px #16465c26;
+  font:800 11px/1.45 "Plus Jakarta Sans",sans-serif;
+  letter-spacing:.015em;
+  text-transform:none;
+  white-space:normal;
+  text-decoration:none;
+  text-align:left;
+  transition:background .2s,box-shadow .2s,transform .2s
+}
+.page-hero .hero-intro-link:hover{
+  gap:24px;
+  border-color:#2a697d;
+  background:#2a697d;
+  box-shadow:0 18px 32px #16465c30;
+  transform:translateY(-2px)
+}
+.page-hero .hero-intro-link span{font-size:19px}
+.page-hero .hero-visual{
+  position:relative;
+  isolation:isolate;
+  width:100%;
+  height:auto;
+  aspect-ratio:6/5;
+  max-height:545px;
+  min-height:380px;
+  min-width:0;
+  border-radius:42px 106px 42px 42px;
+  overflow:hidden;
+  background:#d5c8b6;
+  box-shadow:0 22px 48px #2d565926
+}
+.page-hero .hero-visual-image{
+  display:block;
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+  filter:saturate(1.06) contrast(1.025)
+}
+.page-hero .hero-visual-label{
+  position:absolute;
+  z-index:2;
+  left:21px;
+  bottom:22px;
+  max-width:calc(100% - 42px);
+  padding:11px 14px;
+  border-radius:10px;
+  background:rgba(255,252,246,.94);
+  color:#17475c;
+  box-shadow:0 10px 30px #132e3933;
+  font-size:10px;
+  font-weight:800;
+  line-height:1.5;
+  letter-spacing:.08em
+}
+.page-hero .hero-coordinate{
+  position:relative;
+  top:auto;
+  right:auto;
+  bottom:auto;
+  left:auto;
+  transform:none;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto;
+  align-items:center;
+  gap:17px;
+  width:min(1380px,calc(100% - 112px));
+  min-height:72px;
+  margin:0 auto;
+  padding:17px 0 23px;
+  border-top:1px solid #ded9ce;
+  color:#637d85;
+  background:transparent;
+  font:800 9px/1.55 "Plus Jakarta Sans",sans-serif;
+  letter-spacing:.08em;
+  text-transform:uppercase
+}
+.page-hero .hero-coordinate span{min-width:0}
+.page-hero .hero-coordinate > a{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:6px 0;
+  border-bottom:2px solid #b78552;
+  color:#17475c;
+  font-weight:800;
+  text-decoration:none;
+  white-space:nowrap
+}
+.page-hero .hero-coordinate > a span{font-size:17px}
+.page-hero .hero-coordinate > a:hover{color:#ad733d;border-bottom-color:#ad733d}
+.theme-amerique .page-hero .hero-visual{border-radius:44px 124px 44px 44px}
+.theme-europe .page-hero .hero-visual{border-radius:124px 44px 44px 44px}
+@media(max-width:1180px){
+  .page-hero .hero-shell,.page-hero .hero-coordinate{width:calc(100% - 80px)}
+  .page-hero .hero-shell{gap:34px}
+  .page-hero .page-title,.page-hero .page-title.long{font-size:clamp(39px,4.3vw,60px)}
+  .page-hero .hero-visual{min-height:340px}
+}
+@media(max-width:980px){
+  .page-hero{padding-top:118px}
+  .page-hero .hero-shell{
+    width:calc(100% - 70px);
+    grid-template-columns:minmax(0,1fr);
+    gap:30px;
+    padding-bottom:35px
+  }
+  .page-hero .hero-copy{padding:7px 0 0}
+  .page-hero .page-title,.page-hero .page-title.long{
+    max-width:790px;
+    font-size:clamp(42px,6.65vw,67px)
+  }
+  .page-hero .hero-lede{max-width:710px;font-size:16px}
+  .page-hero .hero-intro-link{margin-top:23px}
+  .page-hero .hero-visual{
+    max-height:410px;
+    min-height:310px;
+    aspect-ratio:16/9;
+    border-radius:28px 72px 28px 28px
+  }
+  .page-hero .hero-coordinate{
+    width:calc(100% - 70px);
+    grid-template-columns:minmax(0,1fr) auto;
+    min-height:65px;
+    padding-bottom:19px
+  }
+  .page-hero .hero-coordinate > span:nth-child(2){display:none}
+}
+@media(max-width:650px){
+  .page-hero{padding:99px 0 0}
+  .page-hero .hero-shell,.page-hero .hero-coordinate{width:calc(100% - 42px)}
+  .page-hero .hero-shell{gap:25px;padding-bottom:27px}
+  .page-hero .hero-copy{padding:0}
+  .page-hero .hero-eyebrow{font-size:9px;gap:8px;margin-bottom:16px}
+  .page-hero .hero-eyebrow::before{width:20px}
+  .page-hero .page-title,.page-hero .page-title.long{
+    font-size:clamp(37px,10.1vw,56px);
+    line-height:1.09;
+    letter-spacing:-.066em;
+    margin-bottom:16px;
+    max-width:100%
+  }
+  .page-hero .hero-lede{font-size:14px;line-height:1.75}
+  .page-hero .hero-intro-link{
+    margin-top:21px;
+    min-height:49px;
+    padding:12px 16px;
+    gap:12px;
+    font-size:11px;
+    border-radius:10px
+  }
+  .page-hero .hero-visual,
+  .theme-amerique .page-hero .hero-visual,
+  .theme-europe .page-hero .hero-visual{
+    aspect-ratio:5/3.7;
+    min-height:230px;
+    max-height:365px;
+    border-radius:23px 64px 23px 23px
+  }
+  .page-hero .hero-visual-label{left:13px;bottom:12px;padding:8px 10px;font-size:9px}
+  .page-hero .hero-coordinate{
+    grid-template-columns:minmax(0,1fr) auto;
+    font-size:8px;
+    gap:10px;
+    padding:13px 0 18px;
+    min-height:60px
+  }
+  .page-hero .hero-coordinate > a{font-size:9px;letter-spacing:0;gap:6px}
+}
+@media(max-width:380px){
+  .page-hero .page-title,.page-hero .page-title.long{font-size:clamp(33px,10vw,39px)}
+  .page-hero .hero-visual{min-height:215px}
+  .page-hero .hero-coordinate{grid-template-columns:minmax(0,1fr)}
+  .page-hero .hero-coordinate > a{justify-self:start}
+}
+@media(prefers-reduced-motion:reduce){
+  .page-hero .hero-copy > *, .page-hero .hero-intro-link{animation:none!important}
+}
