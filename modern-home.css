@@ -206,9 +206,10 @@
  .home-destination-grid,.regions-cards,.home-steps-grid{grid-auto-rows:auto}
  .home-destination-card,.home-destination-card.card-europe{min-height:465px;height:465px;border-radius:25px}
  .destination-card-bottom{min-height:215px;grid-template-rows:auto minmax(53px,auto) minmax(42px,auto) auto;padding:24px}
- .regions-cards .region-card{min-height:0}
+ .regions-cards .region-card{height:500px;min-height:500px}
  .regions-cards .region-card h3{min-height:0}
  .regions-cards .region-image{aspect-ratio:4 / 3}
+ .regions-cards .region-card h3{min-height:0}
  .home-steps-grid .home-step{min-height:200px}
 }
 @media(max-width:400px){
