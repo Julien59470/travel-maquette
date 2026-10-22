@@ -230,3 +230,12 @@ a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,te
   .js-motion .fade-in{opacity:1!important;transform:none!important;filter:none!important}
   .mobile-cta{transition:none}
 }
+
+/* Content must remain visible when scripts are unavailable.
+   Animation activates only after modern.js adds .js-motion. */
+.fade-in{opacity:1;transform:none}
+.js-motion .fade-in:not(.visible){opacity:0;transform:translateY(28px)}
+.js-motion .fade-in.visible{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+ .js-motion .fade-in:not(.visible){opacity:1;transform:none}
+}
