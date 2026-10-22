@@ -285,7 +285,7 @@ body{scroll-margin-top:110px}
 @media(max-width:650px){
  html{scroll-padding-top:83px}
  main section[id],main [id]{scroll-margin-top:83px}
- .feature-grid,.timeline,.europe-mood-grid{grid-auto-rows:auto}
+ .feature-grid,.timeline,.europe-mood-grid{grid-auto-rows:1fr}
  .feature-grid .feature{height:405px;min-height:405px}
  .europe-mood-grid .europe-mood{grid-template-rows:260px auto;min-height:0}
  .europe-mood-grid .europe-mood h3{min-height:0}
