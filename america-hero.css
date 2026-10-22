@@ -82,7 +82,7 @@
 @media(max-width:650px){
   .theme-amerique .page-hero .hero-shell{gap:21px}
   .theme-amerique .page-hero .hero-visual{
-    order:-1;
+    order:1; /* keep title, description and CTA before the photo, as on the other pages */
     width:100%;
     aspect-ratio:5/3.3;
     min-height:215px;
