@@ -12,9 +12,13 @@ const root = path.resolve(__dirname, '..', '_site');
 const allowed = {'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'text/javascript; charset=utf-8','.svg':'image/svg+xml','.webp':'image/webp'};
 const pages = ['index.html','amerique.html','europe.html','concept.html','methode.html','prestations.html','faq.html','contact.html'];
 const devices = [
+  {name:'small-phone',width:320,height:700,isMobile:true,deviceScaleFactor:1},
   {name:'mobile',width:375,height:812,isMobile:true,deviceScaleFactor:1},
+  {name:'large-phone',width:430,height:932,isMobile:true,deviceScaleFactor:1},
   {name:'tablet',width:768,height:1024,isMobile:true,deviceScaleFactor:1},
-  {name:'desktop',width:1440,height:900,deviceScaleFactor:1}
+  {name:'laptop',width:1024,height:768,deviceScaleFactor:1},
+  {name:'desktop',width:1440,height:900,deviceScaleFactor:1},
+  {name:'wide-desktop',width:1920,height:1080,deviceScaleFactor:1}
 ];
 const chromeCandidates = [
   process.env.CHROME_BIN,
@@ -56,7 +60,8 @@ const server = http.createServer((req,res) => {
         page.on('pageerror',err=>errors.push(err.message));
         const response=await page.goto('http://127.0.0.1:'+port+'/'+name,{waitUntil:'domcontentloaded',timeout:25000});
         if(response.status()!==200)throw Error(name+' '+device.name+' returned '+response.status());
-        await page.waitForTimeout(130);
+        await Promise.race([page.evaluate(() => document.fonts.ready),page.waitForTimeout(1500)]);
+        await page.waitForTimeout(110);
         const state=await page.evaluate(()=>{
           const h1=document.querySelector('h1');
           const header=document.querySelector('.page-header');
@@ -81,10 +86,60 @@ const server = http.createServer((req,res) => {
           console.error('Overflow offenders',JSON.stringify(offenders,null,2));
           throw Error(name+' '+device.name+': horizontal overflow '+state.scrollWidth+'>'+state.clientWidth);
         }
+        // Assertions against every comparable group; catch visual regressions
+        // even when no document-level horizontal overflow occurs.
+        const groups = [
+          '.home-destination-grid > .home-destination-card',
+          '.regions-cards > .region-card',
+          '.regions-cards .region-image',
+          '.home-steps-grid > .home-step',
+          '.feature-grid > .feature',
+          '.timeline > .timeline-item',
+          '.europe-mood-grid > .europe-mood',
+          '.europe-mood-grid > .europe-mood > img'
+        ];
+        const geometry = await page.evaluate(selectors => selectors
+          .map(selector => ({
+            selector,
+            rects:[...document.querySelectorAll(selector)].map(element => {
+              const r=element.getBoundingClientRect();
+              return {x:r.x,y:r.y,width:r.width,height:r.height,
+                marginTop:parseFloat(getComputedStyle(element).marginTop)||0};
+            })
+          })).filter(row=>row.rects.length>1),groups);
+        for(const group of geometry){
+          const {rects,selector}=group;
+          const x=rects[0];
+          const tolerance=3;
+          const singleRow=device.width>650;
+          for(const r of rects.slice(1)){
+            const label=name+' '+device.name+' '+selector+' '+JSON.stringify(rects);
+            if(Math.abs(r.width-x.width)>tolerance)throw Error('Card width mismatch: '+label);
+            if(singleRow && Math.abs(r.y-x.y)>tolerance)throw Error('Staggered card top: '+label);
+            if(Math.abs(r.height-x.height)>tolerance)throw Error('Card/image height mismatch: '+label);
+          }
+        }
+        if(name==='index.html'){
+          const anchor=page.locator('.home-hero-actions a[href="#destinations"]');
+          if(await anchor.count()){
+            await anchor.click();
+            const anchored=await page.evaluate(()=>{
+              const section=document.querySelector('#destinations');
+              const header=document.querySelector('.page-header');
+              return {top:section.getBoundingClientRect().top,
+                headerHeight:header.getBoundingClientRect().height};
+            });
+            if(anchored.top<anchored.headerHeight-3){
+              throw Error('Anchor heading hidden behind navigation: '+JSON.stringify(anchored));
+            }
+            await page.evaluate(()=>window.scrollTo(0,0));
+          }
+        }
+
         if(!state.ctaCount)throw Error(name+' '+device.name+': missing contact CTA');
         if(!state.modernFont || !state.css)throw Error(name+': missing font/theme');
         if(errors.length)throw Error(name+' '+device.name+': JS errors '+errors.join('; '));
-        if(name==='index.html' || name==='contact.html'){
+        if((['index.html','amerique.html','europe.html','contact.html'].includes(name)) && (['mobile','tablet','desktop','wide-desktop'].includes(device.name))){
           await page.screenshot({path:path.join(shots,device.name+'-'+name+'.png'),fullPage:true,animations:'disabled'});
         }
         if(name==='contact.html' && device.name==='mobile'){
@@ -97,6 +152,6 @@ const server = http.createServer((req,res) => {
       }
       await context.close();
     }
-    console.log('Browser OK: '+checked+' render checks (8 pages × 3 viewports), no horizontal overflow, h1/CTA/JS verified.');
+    console.log('Browser OK: '+checked+' render checks (8 pages × '+devices.length+' viewports), aligned equal-height cards and images, anchors, no overflow, h1/CTA/JS verified.');
   }finally{await browser.close();server.close();}
 })().catch(err=>{console.error(err);server.close();process.exitCode=1;});
