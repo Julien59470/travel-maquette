@@ -1,0 +1,104 @@
+/* AmericaTravel: keep the opening Monument Valley photograph prominent.
+   Isolated, versioned stylesheet also avoids the transition period where
+   GitHub Pages serves the new HTML with a cached copy of the old hero CSS. */
+.theme-amerique .page-hero{
+  background:linear-gradient(115deg,#faf8f3 0%,#f8f3e9 57%,#f2e7d5 100%);
+}
+.theme-amerique .page-hero .hero-shell{
+  display:grid;
+  grid-template-columns:minmax(0,.83fr) minmax(0,1.17fr);
+  align-items:center;
+  gap:clamp(25px,3.4vw,56px);
+}
+.theme-amerique .page-hero .hero-copy{
+  position:relative;
+  z-index:2;
+  min-width:0;
+  max-width:100%;
+}
+.theme-amerique .page-hero .page-title{
+  font-size:clamp(42px,3.8vw,64px);
+  max-width:100%;
+}
+.theme-amerique .page-hero .hero-visual{
+  display:block;
+  position:relative;
+  z-index:1;
+  min-width:0;
+  width:100%;
+  height:auto;
+  aspect-ratio:1.23/1;
+  min-height:425px;
+  max-height:590px;
+  opacity:1;
+  visibility:visible;
+  overflow:hidden;
+  border-radius:28px 125px 28px 28px;
+  background-color:#bb7650;
+  background-image:url("assets/photos/monument-day.webp");
+  background-position:center 52%;
+  background-size:cover;
+  box-shadow:0 24px 56px rgba(67,54,38,.23);
+}
+.theme-amerique .page-hero .hero-visual-image{
+  display:block;
+  position:absolute;
+  inset:0;
+  z-index:1;
+  width:100%;
+  height:100%;
+  opacity:1;
+  visibility:visible;
+  object-fit:cover;
+  object-position:center 55%;
+  filter:saturate(1.13) contrast(1.035);
+}
+.theme-amerique .page-hero .hero-visual-label{
+  z-index:2;
+  background:rgba(255,252,243,.94);
+  color:#214a58;
+}
+@media(max-width:1180px){
+  .theme-amerique .page-hero .hero-shell{
+    grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr);
+    gap:28px;
+  }
+  .theme-amerique .page-hero .page-title{font-size:clamp(39px,4.2vw,56px)}
+  .theme-amerique .page-hero .hero-visual{min-height:360px}
+}
+@media(max-width:980px){
+  .theme-amerique .page-hero .hero-shell{
+    grid-template-columns:minmax(0,1fr);
+    gap:25px;
+  }
+  .theme-amerique .page-hero .hero-visual{
+    aspect-ratio:16/9;
+    min-height:280px;
+    max-height:440px;
+    border-radius:28px 80px 28px 28px;
+  }
+  .theme-amerique .page-hero .page-title{font-size:clamp(41px,6.5vw,65px)}
+}
+@media(max-width:650px){
+  .theme-amerique .page-hero .hero-shell{gap:21px}
+  .theme-amerique .page-hero .hero-visual{
+    order:-1;
+    width:100%;
+    aspect-ratio:5/3.3;
+    min-height:215px;
+    max-height:330px;
+    border-radius:22px 60px 22px 22px;
+    margin:0;
+  }
+  .theme-amerique .page-hero .page-title{font-size:clamp(36px,9.7vw,55px)}
+  .theme-amerique .page-hero .hero-copy{padding-top:0}
+  .theme-amerique .page-hero .hero-visual-label{
+    bottom:12px;
+    left:12px;
+    padding:8px 11px;
+  }
+}
+@media(max-width:380px){
+  .theme-amerique .page-hero .page-title{font-size:clamp(33px,9.8vw,40px)}
+  .theme-amerique .page-hero .hero-visual{min-height:198px}
+}
