@@ -239,3 +239,17 @@ a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,te
 @media(prefers-reduced-motion:reduce){
  .js-motion .fade-in:not(.visible){opacity:1;transform:none}
 }
+
+/* Browser QA: avoid intrinsic two-column overflow on narrow devices. */
+@media(max-width:650px){
+  .intro-grid,.intro-grid.reverse{grid-template-columns:minmax(0,1fr)}
+  .intro-grid>*,.intro-copy,.contact-layout>*,.offer-headline>*{min-width:0}
+  .intro-copy .button,.regional-split-copy .button{max-width:100%;white-space:normal;text-align:left}
+  .mobile-cta{left:14px;right:auto;width:calc(100vw - 28px);min-width:0;max-width:calc(100vw - 28px)}
+  .mobile-cta>span:first-child{min-width:0;overflow-wrap:anywhere}
+  .art-seal{left:6px;bottom:0}
+}
+@media(max-width:400px){
+  .mobile-cta{left:8px;width:calc(100vw - 16px);max-width:calc(100vw - 16px);justify-content:space-between}
+  .mobile-cta .cta-note{display:none}
+}
