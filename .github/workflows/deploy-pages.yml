@@ -39,7 +39,7 @@ jobs:
           from collections import Counter
           import json
           pages=['index.html','amerique.html','europe.html','concept.html','methode.html','prestations.html','faq.html','contact.html']
-          assets=['pages.css','pages.js','home.css','home.js','modern.css','modern-home.css','modern.js','assets/euramerica-route.svg']
+          assets=['pages.css','pages.js','home.css','home.js','modern.css','modern-home.css','modern.js','america-hero.css','assets/euramerica-route.svg']
           photos=json.loads(Path('photos.json').read_text(encoding='utf-8'))
           class Reader(HTMLParser):
               def __init__(self):
@@ -104,7 +104,7 @@ jobs:
           node --check modern.js
           mkdir -p _site/assets
           cp index.html amerique.html europe.html concept.html methode.html prestations.html faq.html contact.html _site/
-          cp pages.css pages.js home.css home.js modern.css modern-home.css modern.js _site/
+          cp pages.css pages.js home.css home.js modern.css modern-home.css modern.js america-hero.css _site/
           cp assets/euramerica-route.svg _site/assets/
           touch _site/.nojekyll
           test -s _site/index.html
